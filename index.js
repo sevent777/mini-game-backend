@@ -21,6 +21,7 @@ router.post("/api/count", async (ctx) => {
   const { action } = request.body;
   if (action === "inc") {
     await Counter.create();
+    await Counter.create();
   } else if (action === "clear") {
     await Counter.destroy({
       truncate: true,
