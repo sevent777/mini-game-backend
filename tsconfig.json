@@ -5,9 +5,14 @@
     "lib": ["es6"],
     "outDir": "dist",
     "rootDir": "src",
-    "strict": true,
     "esModuleInterop": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "declaration": true,
+    "removeComments": true,
+    "strict": true,
+    "strictPropertyInitialization": false
   },
   "include": ["src/**/*", "types/**/*"],
   "exclude": ["node_modules"]

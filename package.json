@@ -4,7 +4,8 @@
   "description": "微信云托管 koa 框架模板",
   "main": "index.js",
   "scripts": {
-    "start": "tsc && node ./dist/index.js"
+    "start": "nest start --watch",
+    "serve": "nest build && node ./dist/main.js"
   },
   "author": "",
   "license": "Apache-2.0",
@@ -12,20 +13,28 @@
     "node": ">=12.0.0"
   },
   "dependencies": {
-    "@types/node": "^20.2.1",
+    "@nestjs/common": "9.3.12",
+    "@nestjs/core": "9.3.12",
+    "@nestjs/platform-express": "9.3.12",
+    "@nestjs/typeorm": "9.0.1",
     "body-parser": "^1.19.1",
     "koa": "^2.13.4",
     "koa-bodyparser": "^4.3.0",
     "koa-logger": "^3.2.1",
     "koa-router": "^10.1.1",
     "mysql2": "^2.3.3",
+    "rxjs": "^7.8.1",
     "sequelize": "^6.13.0",
-    "typescript": "^5.0.4"
+    "typeorm": "^0.3.16"
   },
   "devDependencies": {
+    "@nestjs/cli": "^9.5.0",
+    "@types/express": "^4.17.17",
     "@types/koa": "^2.13.6",
     "@types/koa-bodyparser": "^4.3.10",
     "@types/koa-logger": "^3.1.2",
-    "@types/koa-router": "^7.4.4"
+    "@types/koa-router": "^7.4.4",
+    "@types/node": "^20.2.1",
+    "typescript": "^5.0.4"
   }
 }
