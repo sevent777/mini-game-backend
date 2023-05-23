@@ -12,7 +12,7 @@ import { UsersModule } from './users/users.module';
       port: Number(MYSQL_PORT),
       username: MYSQL_USERNAME,
       password: MYSQL_PASSWORD,
-      database: 'test',
+      database: 'nodejs_demo',
       autoLoadEntities: true,
       synchronize: true,
     }),
