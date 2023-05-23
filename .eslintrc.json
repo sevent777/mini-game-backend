@@ -1,0 +1,46 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "extends": [
+    "prettier",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "plugins": ["@typescript-eslint", "prettier", "simple-import-sort"],
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module"
+  },
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "singleQuote": true,
+        "printWidth": 100
+      }
+    ],
+    "@typescript-eslint/no-var-requires": "off",
+    "@typescript-eslint/no-empty-function": ["warn"],
+    "@typescript-eslint/no-explicit-any": ["error"],
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "eqeqeq": "error",
+    "prefer-template": "error",
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error",
+    "@typescript-eslint/no-unused-vars": "error"
+  },
+  "overrides": [
+    {
+      // enable the rule specifically for TypeScript files
+      "files": ["*.ts"],
+      "rules": {
+        "@typescript-eslint/no-var-requires": "error"
+      }
+    }
+  ],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "ignorePatterns": ["js/*", "lib/*", "dist/*"]
+}
