@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { MYSQL_HOST, MYSQL_PASSWORD, MYSQL_PORT, MYSQL_USERNAME } from './constant';
+import { DATABASE_NAME, MYSQL_HOST, MYSQL_PASSWORD, MYSQL_PORT, MYSQL_USERNAME } from './constant';
 import { UsersModule } from './users/users.module';
 
 @Module({
@@ -12,9 +12,10 @@ import { UsersModule } from './users/users.module';
       port: Number(MYSQL_PORT),
       username: MYSQL_USERNAME,
       password: MYSQL_PASSWORD,
-      database: 'nodejs_demo',
+      database: DATABASE_NAME,
       autoLoadEntities: true,
       synchronize: true,
+      logging: true,
     }),
     UsersModule,
   ],

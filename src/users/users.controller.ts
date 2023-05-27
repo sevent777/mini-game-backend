@@ -1,48 +1,36 @@
 import {
   Body,
   Controller,
-  Delete,
   Get,
   Param,
-  Post,
   ParseIntPipe,
-  Res,
+  Post,
+  Response,
+  ValidationPipe,
 } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
+import { Response as ExpressResponse } from 'express';
+
+import { LoginPayload } from './user.dto';
 import { User } from './user.entity';
 import { UsersService } from './users.service';
-import { readFileSync } from 'fs';
-import { join } from 'path';
-import { Response } from 'express';
 
-@Controller('/')
+@Controller('/user')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @Get()
-  index(@Res() response: Response) {
-    response
-      .type('text/html')
-      .send(readFileSync(join(__dirname, '../../index.html')).toString());
-  }
-
-  @Post()
-  create(@Body() createUserDto: CreateUserDto): Promise<User> {
-    return this.usersService.create(createUserDto);
-  }
-
-  @Get()
-  findAll(): Promise<User[]> {
-    return this.usersService.findAll();
+  @Post('/login')
+  async login(
+    @Body(new ValidationPipe()) loginPayload: LoginPayload,
+    @Response() rsp: ExpressResponse
+  ): Promise<User> {
+    const userInfo = await this.usersService.login(loginPayload);
+    console.log('rsp :>> ', rsp);
+    // rsp.cookie =
+    return userInfo;
   }
 
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number): Promise<User | null> {
     return this.usersService.findOne(id);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string): Promise<void> {
-    return this.usersService.remove(id);
   }
 }

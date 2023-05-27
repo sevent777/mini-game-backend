@@ -1,16 +1,19 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-
+import { Column, Entity, PrimaryGeneratedColumn, Unique } from 'typeorm';
 @Entity()
+@Unique(['wxOpenid', 'key'])
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
-  firstName: string;
+  @PrimaryGeneratedColumn('uuid')
+  key: string;
 
   @Column()
-  lastName: string;
+  wxOpenid?: string;
 
-  @Column({ default: true })
-  isActive: boolean;
+  @Column()
+  name: string;
+
+  @Column()
+  avatarUrl: string;
 }
