@@ -6,7 +6,7 @@ export class User {
 
   @Column()
   @Generated('uuid')
-  uuid: string;
+  key: string;
 
   @Column()
   wxOpenid?: string;
