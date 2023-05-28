@@ -16,7 +16,7 @@ export class UsersService {
     const user = new User();
     user.wxOpenid = login.wxOpenid;
     user.name = login.name;
-    user.avatarUrl = login.name;
+    user.avatarUrl = login.avatarUrl;
     return this.usersRepository.save(user);
   }
 
