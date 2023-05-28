@@ -1,6 +1,6 @@
 import { IsOptional, IsString } from 'class-validator';
 
-export class LoginPayload {
+export class UserPayload {
   @IsString()
   name: string;
 

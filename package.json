@@ -6,7 +6,8 @@
   "scripts": {
     "start": "cross-env NODE_ENV=development nest start --watch",
     "serve": "nest build && node ./dist/main.js",
-    "eslint": "eslint --fix --max-warnings 0 --ext .ts,.js ./"
+    "eslint": "eslint --fix --max-warnings 0 --ext .ts,.js ./",
+    "lint-staged": "lint-staged --allow-empty"
   },
   "author": "",
   "license": "Apache-2.0",
@@ -49,6 +50,7 @@
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-simple-import-sort": "^10.0.0",
     "husky": "^8.0.3",
+    "lint-staged": "^13.2.2",
     "prettier": "^2.8.4",
     "typescript": "^5.0.4"
   },

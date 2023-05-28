@@ -1,8 +1,7 @@
-import { Body, Controller, Post, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Headers, Post, Res, ValidationPipe } from '@nestjs/common';
+import { Response } from 'express';
 
-// import { Response as ExpressResponse } from 'express';
-import { LoginPayload } from './user.dto';
-import { User } from './user.entity';
+import { UserPayload } from './user.dto';
 import { UsersService } from './users.service';
 
 @Controller('/user')
@@ -11,10 +10,17 @@ export class UsersController {
 
   @Post('/login')
   async login(
-    @Body(new ValidationPipe()) loginPayload: LoginPayload
-    // @Response() rsp: ExpressResponse
-  ): Promise<User> {
-    const userInfo = await this.usersService.login(loginPayload);
-    return userInfo;
+    @Headers() headers: Record<string, string>,
+    @Body(new ValidationPipe()) UserPayload: UserPayload,
+    @Res() res: Response
+  ) {
+    const userPayload: UserPayload = {
+      ...UserPayload,
+      wxOpenid: headers['x-wx-openid'],
+    };
+    const userInfo = await this.usersService.create(userPayload);
+    res.json({
+      userInfo,
+    });
   }
 }
