@@ -1,11 +1,12 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, Generated, PrimaryGeneratedColumn } from 'typeorm';
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
-  // @PrimaryGeneratedColumn('uuid')
-  // key: string;
+  @Column()
+  @Generated('uuid')
+  uuid: string;
 
   @Column()
   wxOpenid?: string;

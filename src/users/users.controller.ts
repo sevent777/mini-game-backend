@@ -1,13 +1,4 @@
-import {
-  Body,
-  Controller,
-  Get,
-  Param,
-  ParseIntPipe,
-  Post,
-  Response,
-  ValidationPipe,
-} from '@nestjs/common';
+import { Body, Controller, Post, Response, ValidationPipe } from '@nestjs/common';
 import { Response as ExpressResponse } from 'express';
 
 import { LoginPayload } from './user.dto';
