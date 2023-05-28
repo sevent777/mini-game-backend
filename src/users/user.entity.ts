@@ -1,6 +1,6 @@
 import { Column, Entity, PrimaryGeneratedColumn, Unique } from 'typeorm';
 @Entity()
-@Unique(['wxOpenid', 'key'])
+@Unique(['wxOpenid'])
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
