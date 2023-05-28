@@ -9,14 +9,21 @@ import { User } from './user.entity';
 export class UsersService {
   constructor(
     @InjectRepository(User)
-    private readonly usersRepository: Repository<User>
+    private readonly userRepository: Repository<User>
   ) {}
 
-  create(login: UserPayload): Promise<User> {
-    const user = new User();
-    user.wxOpenid = login.wxOpenid;
-    user.name = login.name;
-    user.avatarUrl = login.avatarUrl;
-    return this.usersRepository.save(user);
+  async save(payload: UserPayload): Promise<User> {
+    const existingUser = await this.userRepository.findOne({
+      where: {
+        wxOpenid: payload.wxOpenid,
+      },
+    });
+    const user = existingUser ?? new User();
+
+    user.name = payload.name;
+    user.avatarUrl = payload.avatarUrl;
+    user.wxOpenid = payload.wxOpenid;
+
+    return this.userRepository.save(user);
   }
 }
