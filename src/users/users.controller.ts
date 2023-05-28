@@ -1,6 +1,6 @@
-import { Body, Controller, Post, Response, ValidationPipe } from '@nestjs/common';
-import { Response as ExpressResponse } from 'express';
+import { Body, Controller, Post, ValidationPipe } from '@nestjs/common';
 
+// import { Response as ExpressResponse } from 'express';
 import { LoginPayload } from './user.dto';
 import { User } from './user.entity';
 import { UsersService } from './users.service';
@@ -11,12 +11,10 @@ export class UsersController {
 
   @Post('/login')
   async login(
-    @Body(new ValidationPipe()) loginPayload: LoginPayload,
-    @Response() rsp: ExpressResponse
+    @Body(new ValidationPipe()) loginPayload: LoginPayload
+    // @Response() rsp: ExpressResponse
   ): Promise<User> {
     const userInfo = await this.usersService.login(loginPayload);
-    console.log('rsp :>> ', rsp);
-    // rsp.cookie =
     return userInfo;
   }
 }
