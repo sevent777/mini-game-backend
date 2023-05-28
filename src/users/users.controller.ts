@@ -28,9 +28,4 @@ export class UsersController {
     // rsp.cookie =
     return userInfo;
   }
-
-  @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: number): Promise<User | null> {
-    return this.usersService.findOne(id);
-  }
 }

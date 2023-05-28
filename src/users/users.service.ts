@@ -19,8 +19,4 @@ export class UsersService {
     user.avatarUrl = login.avatarUrl;
     return this.usersRepository.save(user);
   }
-
-  findOne(id: number): Promise<User | null> {
-    return this.usersRepository.findOneBy({ id });
-  }
 }
