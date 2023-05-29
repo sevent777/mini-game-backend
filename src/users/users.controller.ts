@@ -1,21 +1,30 @@
-import { Body, Controller, Headers, Post, Res, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Headers, Post, Req, Res, ValidationPipe } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { Response } from 'express';
+import { Request, Response } from 'express';
 
 import { Access_Token_Key } from '../constant';
+import { UserID } from '../core';
 import { UserPayload } from './user.dto';
 import { UsersService } from './users.service';
 
 @Controller('/user')
 export class UsersController {
-  constructor(private readonly usersService: UsersService, private jwtService: JwtService) {}
+  constructor(
+    private readonly usersService: UsersService,
+    private readonly jwtService: JwtService
+  ) {}
 
   @Post('/login')
   async login(
     @Headers() headers: Record<string, string>,
-    @Body(new ValidationPipe()) UserPayload: UserPayload,
-    @Res() res: Response
+    @Req() request: Request,
+    @Body(new ValidationPipe())
+    UserPayload: UserPayload,
+    @Res() res: Response,
+    @UserID() userId: string
   ) {
+    console.log('userId :>> ', userId);
+
     const userPayload: UserPayload = {
       ...UserPayload,
       wxOpenid: headers['x-wx-openid'],

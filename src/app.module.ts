@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
@@ -10,6 +10,7 @@ import {
   MYSQL_PORT,
   MYSQL_USERNAME,
 } from './constant';
+import { LoginMiddleware } from './core';
 import { UsersModule } from './users/users.module';
 
 @Module({
@@ -34,4 +35,8 @@ import { UsersModule } from './users/users.module';
     }),
   ],
 })
-export class AppModule {}
+export class AppModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(LoginMiddleware).forRoutes('*');
+  }
+}
