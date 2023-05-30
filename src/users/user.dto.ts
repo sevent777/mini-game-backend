@@ -1,6 +1,10 @@
-import { IsOptional, IsString } from 'class-validator';
+import { IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class UserPayload {
+  @IsNumber()
+  @IsOptional()
+  id: number;
+
   @IsString()
   name: string;
 

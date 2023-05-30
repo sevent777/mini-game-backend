@@ -14,9 +14,14 @@ export class UsersService {
 
   async save(payload: UserPayload): Promise<User> {
     const existingUser = await this.userRepository.findOne({
-      where: {
-        wxOpenid: payload.wxOpenid,
-      },
+      where: [
+        {
+          id: payload.id,
+        },
+        {
+          wxOpenid: payload.wxOpenid,
+        },
+      ],
     });
     const user = existingUser ?? new User();
 

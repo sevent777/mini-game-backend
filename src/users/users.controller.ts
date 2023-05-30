@@ -21,21 +21,20 @@ export class UsersController {
     @Body(new ValidationPipe())
     UserPayload: UserPayload,
     @Res() res: Response,
-    @UserID() userId: string
+    @UserID() userId: number
   ) {
     console.log('userId :>> ', userId);
 
     const userPayload: UserPayload = {
       ...UserPayload,
       wxOpenid: headers['x-wx-openid'],
+      id: userId,
     };
     const userInfo = await this.usersService.save(userPayload);
-    res.cookie(
-      Access_Token_Key,
-      await this.jwtService.signAsync({
-        id: userInfo.id,
-      })
-    );
+    const jwtStr = await this.jwtService.signAsync({
+      id: userInfo.id,
+    });
+    res.cookie(Access_Token_Key, jwtStr);
     res.json({
       userInfo,
     });
