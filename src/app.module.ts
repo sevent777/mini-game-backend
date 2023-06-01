@@ -1,6 +1,7 @@
 import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { UsersModule } from 'modules/user';
 
 import {
   DATABASE_NAME,
@@ -11,7 +12,6 @@ import {
   MYSQL_USERNAME,
 } from './constant';
 import { LoginMiddleware } from './core';
-import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [

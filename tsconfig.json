@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "target": "es6",
     "module": "commonjs",
     "lib": ["es6"],
@@ -12,7 +13,10 @@
     "declaration": true,
     "removeComments": true,
     "strict": true,
-    "strictPropertyInitialization": false
+    "strictPropertyInitialization": false,
+    "paths": {
+      "*": ["./src/*"],
+    },
   },
   "include": ["src/**/*", "types/**/*"],
   "exclude": ["node_modules"]

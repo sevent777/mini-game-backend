@@ -1,11 +1,10 @@
 import { Body, Controller, Headers, Post, Req, Res, ValidationPipe } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { Access_Token_Key } from 'constant';
+import { UserID } from 'core';
+import { UserPayload } from 'dto';
 import { Request, Response } from 'express';
-
-import { Access_Token_Key } from '../constant';
-import { UserID } from '../core';
-import { UserPayload } from './user.dto';
-import { UsersService } from './users.service';
+import { UsersService } from 'services/user';
 
 @Controller('/user')
 export class UsersController {
@@ -23,8 +22,6 @@ export class UsersController {
     @Res() res: Response,
     @UserID() userId: number
   ) {
-    console.log('userId :>> ', userId);
-
     const userPayload: UserPayload = {
       ...UserPayload,
       wxOpenid: headers['x-wx-openid'],
