@@ -1,7 +1,7 @@
-import { Body, Controller, Headers, Post, Req, Res, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Get, Headers, Post, Req, Res, ValidationPipe } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { Access_Token_Key } from 'constant';
-import { UserID } from 'core';
+import { genRspJson, UserID } from 'core';
 import { UserPayload } from 'dto';
 import { Request, Response } from 'express';
 import { UsersService } from 'services/user';
@@ -32,8 +32,17 @@ export class UsersController {
       id: userInfo.id,
     });
     res.cookie(Access_Token_Key, jwtStr);
-    res.json({
-      userInfo,
-    });
+    res.json(
+      genRspJson({
+        userInfo,
+      })
+    );
+  }
+
+  @Get('/test')
+  test() {
+    return {
+      test: '33',
+    };
   }
 }
