@@ -1,18 +1,25 @@
 import { Body, Controller, Get, Headers, Post, Req, Res, ValidationPipe } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Access_Token_Key } from 'constant';
 import { genRspJson, UserID } from 'core';
-import { UserPayload } from 'dto';
+import { LoginResponse, UserPayload } from 'dto';
 import { Request, Response } from 'express';
 import { UsersService } from 'services/user';
 
-@Controller('/user')
+@ApiTags('user')
+@Controller('user')
 export class UsersController {
   constructor(
     private readonly usersService: UsersService,
     private readonly jwtService: JwtService
   ) {}
 
+  @ApiResponse({
+    status: 200,
+    description: 'The found record',
+    type: LoginResponse,
+  })
   @Post('/login')
   async login(
     @Headers() headers: Record<string, string>,

@@ -1,4 +1,6 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { Column, Entity, Generated, PrimaryGeneratedColumn } from 'typeorm';
+
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
@@ -13,9 +15,11 @@ export class User {
   })
   wxOpenid?: string;
 
+  @ApiProperty()
   @Column()
   name: string;
 
+  @ApiProperty()
   @Column()
   avatarUrl: string;
 }
