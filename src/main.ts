@@ -12,6 +12,7 @@ async function bootstrap() {
   app.useGlobalFilters(new AllExceptionsFilter());
   app.useGlobalInterceptors(new TransformInterceptor());
   app.use(cookieParser());
+  app.setGlobalPrefix('api');
 
   const options = new DocumentBuilder()
     .setTitle('mini game')

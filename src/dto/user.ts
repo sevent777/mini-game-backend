@@ -1,21 +1,24 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNumber, IsOptional, IsString } from 'class-validator';
 import { User } from 'entity';
-export class UserPayload {
+export class LoginPayload {
   @IsNumber()
   @IsOptional()
   id: number;
 
+  @ApiProperty()
+  @IsOptional()
   @IsString()
   name: string;
 
   @ApiProperty()
-  @IsString()
   @IsOptional()
+  @IsString()
   wxOpenid: string;
 
-  @IsString()
   @ApiProperty()
+  @IsString()
+  @IsOptional()
   avatarUrl: string;
 }
 

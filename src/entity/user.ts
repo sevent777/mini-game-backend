@@ -16,10 +16,14 @@ export class User {
   wxOpenid?: string;
 
   @ApiProperty()
-  @Column()
+  @Column({
+    default: 'momo',
+  })
   name: string;
 
   @ApiProperty()
-  @Column()
+  @Column({
+    nullable: true,
+  })
   avatarUrl: string;
 }

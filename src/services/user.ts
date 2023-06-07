@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UserPayload } from 'dto';
+import { LoginPayload } from 'dto';
 import { User } from 'entity';
-import { Repository } from 'typeorm';
+import { pick } from 'lodash';
+import { FindOptionsWhere, Repository } from 'typeorm';
 
 @Injectable()
 export class UsersService {
@@ -11,22 +12,32 @@ export class UsersService {
     private readonly userRepository: Repository<User>
   ) {}
 
-  async save(payload: UserPayload): Promise<User> {
+  async searchExistingUsers(payload: LoginPayload) {
+    const conditions: FindOptionsWhere<User>[] = [];
+    if (payload.id) {
+      conditions.push({
+        id: payload.id,
+      });
+    }
+    if (payload.wxOpenid) {
+      conditions.push({
+        wxOpenid: payload.wxOpenid,
+      });
+    }
+    if (conditions.length === 0) {
+      return null;
+    }
     const existingUser = await this.userRepository.findOne({
-      where: [
-        {
-          id: payload.id,
-        },
-        {
-          wxOpenid: payload.wxOpenid,
-        },
-      ],
+      where: conditions,
     });
+    return existingUser;
+  }
+
+  async login(payload: LoginPayload): Promise<User> {
+    const existingUser = await this.searchExistingUsers(payload);
     const user = existingUser ?? new User();
 
-    user.name = payload.name;
-    user.avatarUrl = payload.avatarUrl;
-    user.wxOpenid = payload.wxOpenid;
+    Object.assign(user, pick(payload, ['name', 'avatarUrl', 'wxOpenid']));
 
     return this.userRepository.save(user);
   }

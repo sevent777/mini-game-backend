@@ -1,9 +1,9 @@
-import { Body, Controller, Get, Headers, Post, Req, Res, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Headers, Post, Req, Res, ValidationPipe } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Access_Token_Key } from 'constant';
 import { genRspJson, UserID } from 'core';
-import { LoginResponse, UserPayload } from 'dto';
+import { LoginPayload, LoginResponse } from 'dto';
 import { Request, Response } from 'express';
 import { UsersService } from 'services/user';
 
@@ -17,7 +17,6 @@ export class UsersController {
 
   @ApiResponse({
     status: 200,
-    description: 'The found record',
     type: LoginResponse,
   })
   @Post('/login')
@@ -25,31 +24,26 @@ export class UsersController {
     @Headers() headers: Record<string, string>,
     @Req() request: Request,
     @Body(new ValidationPipe())
-    UserPayload: UserPayload,
+    LoginPayload: LoginPayload,
     @Res() res: Response,
     @UserID() userId: number
   ) {
-    const userPayload: UserPayload = {
-      ...UserPayload,
+    const loginPayload: LoginPayload = {
+      ...LoginPayload,
       wxOpenid: headers['x-wx-openid'],
       id: userId,
     };
-    const userInfo = await this.usersService.save(userPayload);
+    const userInfo = await this.usersService.login(loginPayload);
     const jwtStr = await this.jwtService.signAsync({
       id: userInfo.id,
     });
     res.cookie(Access_Token_Key, jwtStr);
-    res.json(
-      genRspJson({
-        userInfo,
-      })
-    );
-  }
-
-  @Get('/test')
-  test() {
-    return {
-      test: '33',
-    };
+    res
+      .json(
+        genRspJson({
+          userInfo,
+        })
+      )
+      .send();
   }
 }
