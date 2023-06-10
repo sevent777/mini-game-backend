@@ -1,0 +1,10 @@
+{
+  "generateOptions": {
+    "spec": {
+      "service": false,
+      "s": false,
+      "controller": false,
+      "co": false
+    }
+  }
+}

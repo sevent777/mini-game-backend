@@ -5,15 +5,13 @@ import { Access_Token_Key } from 'constant';
 import { genRspJson, UserID } from 'core';
 import { LoginPayload, LoginResponse } from 'dto';
 import { Request, Response } from 'express';
-import { UsersService } from 'services/user';
+
+import { UserService } from './user.service';
 
 @ApiTags('user')
 @Controller('user')
-export class UsersController {
-  constructor(
-    private readonly usersService: UsersService,
-    private readonly jwtService: JwtService
-  ) {}
+export class UserController {
+  constructor(private readonly userService: UserService, private readonly jwtService: JwtService) {}
 
   @ApiResponse({
     status: 200,
@@ -33,7 +31,7 @@ export class UsersController {
       wxOpenid: headers['x-wx-openid'],
       id: userId,
     };
-    const userInfo = await this.usersService.login(loginPayload);
+    const userInfo = await this.userService.login(loginPayload);
     const jwtStr = await this.jwtService.signAsync({
       id: userInfo.id,
     });

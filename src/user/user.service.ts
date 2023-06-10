@@ -6,7 +6,7 @@ import { pick } from 'lodash';
 import { FindOptionsWhere, Repository } from 'typeorm';
 
 @Injectable()
-export class UsersService {
+export class UserService {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>

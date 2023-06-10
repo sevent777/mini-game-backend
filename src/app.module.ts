@@ -1,7 +1,6 @@
 import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UsersModule } from 'modules/user';
 
 import {
   DATABASE_NAME,
@@ -12,6 +11,7 @@ import {
   MYSQL_USERNAME,
 } from './constant';
 import { LoginMiddleware } from './core';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -31,7 +31,7 @@ import { LoginMiddleware } from './core';
       secret: JWT_SECRET,
       signOptions: { expiresIn: '7d' },
     }),
-    UsersModule,
+    UserModule,
   ],
 })
 export class AppModule {

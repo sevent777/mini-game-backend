@@ -1,11 +1,10 @@
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import cookieParser from 'cookie-parser';
-import { TransformInterceptor } from 'core';
+import { AllExceptionsFilter, TransformInterceptor } from 'core';
 
 import { AppModule } from './app.module';
 import { port } from './constant';
-import { AllExceptionsFilter } from './filters';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
