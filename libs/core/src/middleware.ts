@@ -1,8 +1,8 @@
+import { Access_Token_Key } from '@app/constant';
 import { Injectable, NestMiddleware } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { NextFunction, Response } from 'express';
 
-import { Access_Token_Key } from '../constant';
 import { ExtendedRequest } from './context';
 
 @Injectable()

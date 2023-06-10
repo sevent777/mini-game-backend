@@ -1,7 +1,7 @@
+import { AllExceptionsFilter, TransformInterceptor } from '@app/core';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import cookieParser from 'cookie-parser';
-import { AllExceptionsFilter, TransformInterceptor } from 'core';
 
 import { AppModule } from './app.module';
 import { port } from './constant';
