@@ -1,6 +1,13 @@
 {
+  "$schema": "https://json.schemastore.org/nest-cli",
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "apps/main/src",
+  "compilerOptions": {
+    "deleteOutDir": true
+  },
   "generateOptions": {
     "spec": {
+      "app": false,
       "service": false,
       "s": false,
       "controller": false,
