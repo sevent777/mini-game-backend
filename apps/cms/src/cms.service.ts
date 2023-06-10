@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class CmsService {
-  getHello(): string {
+  createConfig() {
     return 'Hello World!';
   }
 }

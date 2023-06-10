@@ -1,7 +1,3 @@
-import { MiddlewareConsumer, Module } from '@nestjs/common';
-import { JwtModule } from '@nestjs/jwt';
-import { TypeOrmModule } from '@nestjs/typeorm';
-
 import {
   DATABASE_NAME,
   JWT_SECRET,
@@ -9,8 +5,12 @@ import {
   MYSQL_PASSWORD,
   MYSQL_PORT,
   MYSQL_USERNAME,
-} from './constant';
-import { LoginMiddleware } from './core';
+} from '@app/constant';
+import { LoginMiddleware } from '@app/core';
+import { MiddlewareConsumer, Module } from '@nestjs/common';
+import { JwtModule } from '@nestjs/jwt';
+import { TypeOrmModule } from '@nestjs/typeorm';
+
 import { UserModule } from './user/user.module';
 
 @Module({

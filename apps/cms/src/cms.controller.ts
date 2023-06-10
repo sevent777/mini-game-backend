@@ -1,13 +1,13 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Post } from '@nestjs/common';
 
 import { CmsService } from './cms.service';
 
-@Controller()
+@Controller('cms')
 export class CmsController {
   constructor(private readonly cmsService: CmsService) {}
 
-  @Get()
-  getHello(): string {
-    return this.cmsService.getHello();
+  @Post('config/create')
+  create() {
+    return this.cmsService.createConfig();
   }
 }
