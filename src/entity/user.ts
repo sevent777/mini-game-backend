@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Column, Entity, Generated, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, Generated, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class User {
@@ -9,6 +9,9 @@ export class User {
   @Column()
   @Generated('uuid')
   key: string;
+
+  @CreateDateColumn()
+  createdAt: Date;
 
   @Column({
     nullable: true,

@@ -26,13 +26,12 @@ import { LoginMiddleware } from './core';
       synchronize: true,
       logging: true,
     }),
-    UsersModule,
-
     JwtModule.register({
       global: true,
       secret: JWT_SECRET,
       signOptions: { expiresIn: '7d' },
     }),
+    UsersModule,
   ],
 })
 export class AppModule {
