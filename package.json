@@ -1,5 +1,5 @@
 {
-  "name": "wxcloudrun",
+  "name": "main",
   "version": "1.0.0",
   "description": "微信云托管nest框架",
   "main": "index.js",
