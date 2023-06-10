@@ -34,4 +34,7 @@ export class Configuration {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @Column({ type: 'datetime' })
+  effectiveTime: Date;
 }
