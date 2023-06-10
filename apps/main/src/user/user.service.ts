@@ -1,9 +1,9 @@
+import { User } from '@app/entity';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { pick } from 'lodash';
 import { FindOptionsWhere, Repository } from 'typeorm';
 
-import { User } from '../entity';
 import { LoginPayload } from './user.dto';
 
 @Injectable()

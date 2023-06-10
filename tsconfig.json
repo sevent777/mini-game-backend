@@ -27,6 +27,12 @@
       ],
       "@app/core/*": [
         "libs/core/src/*"
+      ],
+      "@app/entity": [
+        "libs/entity/src"
+      ],
+      "@app/entity/*": [
+        "libs/entity/src/*"
       ]
     }
   },

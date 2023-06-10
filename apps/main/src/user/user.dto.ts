@@ -1,7 +1,6 @@
+import { User } from '@app/entity';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNumber, IsOptional, IsString } from 'class-validator';
-
-import { User } from '../entity';
 
 export class LoginPayload {
   @IsNumber()
