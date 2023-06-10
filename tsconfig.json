@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "target": "es6",
+    "target": "es2017",
     "module": "commonjs",
-    "lib": ["es6"],
+    "lib": ["es2017"],
     "outDir": "./dist",
     "rootDir": "src",
     "esModuleInterop": true,
