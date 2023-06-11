@@ -13,6 +13,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { CmsModule } from './cms/cms.module';
 import { UserModule } from './user/user.module';
+import { WebModule } from './web/web.module';
 
 @Module({
   imports: [
@@ -34,6 +35,7 @@ import { UserModule } from './user/user.module';
     }),
     CmsModule,
     UserModule,
+    WebModule,
   ],
 })
 export class AppModule {

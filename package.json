@@ -6,8 +6,10 @@
   "scripts": {
     "start": "cross-env NODE_ENV=development nest start --watch",
     "serve": "nest build && node ./dist/main.js",
-    "eslint": "eslint --fix --max-warnings 0 --ext .ts,.js ./",
-    "lint-staged": "lint-staged --allow-empty"
+    "eslint": "eslint --fix --max-warnings 0 --ext .ts ./",
+    "lint-staged": "lint-staged --allow-empty",
+    "start-web": "cd web && npm run dev",
+    "build-web": "cd web && npm run build"
   },
   "author": "",
   "license": "Apache-2.0",
@@ -19,6 +21,7 @@
     "@nestjs/core": "9.3.12",
     "@nestjs/jwt": "^10.0.3",
     "@nestjs/platform-express": "9.3.12",
+    "@nestjs/serve-static": "^3.0.1",
     "@nestjs/swagger": "^6.3.0",
     "@nestjs/typeorm": "9.0.1",
     "body-parser": "^1.19.1",
@@ -50,6 +53,7 @@
     "husky": "^8.0.3",
     "lint-staged": "^13.2.2",
     "prettier": "^2.8.4",
+    "ts-loader": "^9.4.3",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.4"
   },

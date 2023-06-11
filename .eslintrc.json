@@ -37,10 +37,5 @@
       }
     }
   ],
-  "settings": {
-    "react": {
-      "version": "detect"
-    }
-  },
   "ignorePatterns": ["js/*", "lib/*", "dist/*"]
 }
