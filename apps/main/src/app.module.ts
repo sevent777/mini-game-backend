@@ -11,6 +11,7 @@ import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
+import { CmsModule } from './cms/cms.module';
 import { UserModule } from './user/user.module';
 
 @Module({
@@ -31,6 +32,7 @@ import { UserModule } from './user/user.module';
       secret: JWT_SECRET,
       signOptions: { expiresIn: '7d' },
     }),
+    CmsModule,
     UserModule,
   ],
 })

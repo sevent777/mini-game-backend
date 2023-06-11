@@ -17,10 +17,14 @@ export class Configuration {
   type: string;
 
   @ApiProperty()
+  @Column()
+  name: string;
+
+  @ApiProperty()
   @Column({
     type: 'json',
   })
-  content: string;
+  content: object;
 
   @ApiProperty()
   @Column({

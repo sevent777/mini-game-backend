@@ -1,4 +1,4 @@
-import { Access_Token_Key } from '@app/constant';
+import { ACCESS_TOKEN_KEY } from '@app/constant';
 import { Injectable, NestMiddleware } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { NextFunction, Response } from 'express';
@@ -10,7 +10,7 @@ export class LoginMiddleware implements NestMiddleware {
   constructor(private readonly jwtService: JwtService) {}
   use(req: ExtendedRequest, res: Response, next: NextFunction) {
     const { cookies } = req;
-    const accessToken = cookies[Access_Token_Key];
+    const accessToken = cookies[ACCESS_TOKEN_KEY];
     if (!accessToken) {
       next();
     }

@@ -9,6 +9,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
 
     if (exception instanceof HttpException) {
       response.json(exception.getResponse());
+      return;
     }
 
     const message = exception instanceof Error ? exception.message : 'Internal server error';

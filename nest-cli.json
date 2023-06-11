@@ -22,24 +22,6 @@
         "tsConfigPath": "apps/main/tsconfig.app.json"
       }
     },
-    "cms": {
-      "type": "application",
-      "root": "apps/cms",
-      "entryFile": "main",
-      "sourceRoot": "apps/cms/src",
-      "compilerOptions": {
-        "tsConfigPath": "apps/cms/tsconfig.app.json"
-      }
-    },
-    "v2": {
-      "type": "application",
-      "root": "apps/v2",
-      "entryFile": "main",
-      "sourceRoot": "apps/v2/src",
-      "compilerOptions": {
-        "tsConfigPath": "apps/v2/tsconfig.app.json"
-      }
-    },
     "constant": {
       "type": "library",
       "root": "libs/constant",

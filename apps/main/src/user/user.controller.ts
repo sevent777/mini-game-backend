@@ -1,4 +1,4 @@
-import { Access_Token_Key } from '@app/constant';
+import { ACCESS_TOKEN_KEY } from '@app/constant';
 import { genRspJson, UserID } from '@app/core';
 import { Body, Controller, Headers, Post, Req, Res, ValidationPipe } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
@@ -22,20 +22,20 @@ export class UserController {
     @Headers() headers: Record<string, string>,
     @Req() request: Request,
     @Body(new ValidationPipe())
-    LoginPayload: LoginPayload,
+    loginPayload: LoginPayload,
     @Res() res: Response,
     @UserID() userId: number
   ) {
-    const loginPayload: LoginPayload = {
-      ...LoginPayload,
+    const finalLoginPayload: LoginPayload = {
+      ...loginPayload,
       wxOpenid: headers['x-wx-openid'],
       id: userId,
     };
-    const userInfo = await this.userService.login(loginPayload);
+    const userInfo = await this.userService.login(finalLoginPayload);
     const jwtStr = await this.jwtService.signAsync({
       id: userInfo.id,
     });
-    res.cookie(Access_Token_Key, jwtStr);
+    res.cookie(ACCESS_TOKEN_KEY, jwtStr);
     res
       .json(
         genRspJson({
