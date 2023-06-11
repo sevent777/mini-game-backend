@@ -7,6 +7,7 @@ import { WebController } from './web.controller';
   imports: [
     ServeStaticModule.forRoot({
       rootPath: path.join(__dirname, '../../../web/dist'),
+      exclude: ['/api/(.*)'],
     }),
   ],
   controllers: [WebController],

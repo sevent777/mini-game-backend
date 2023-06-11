@@ -1,8 +1,5 @@
-import 'antd/dist/reset.css';
-
 import { LaptopOutlined, NotificationOutlined, UserOutlined } from '@ant-design/icons';
-import { Layout, Menu } from 'antd';
-
+import { Button, Layout, Menu } from 'antd';
 const { Header, Sider, Content } = Layout;
 
 const App = () => {
@@ -24,7 +21,9 @@ const App = () => {
       </Sider>
       <Layout>
         <Header style={{ background: '#fff', padding: 0 }}>Header</Header>
-        <Content style={{ margin: '16px' }}>Content</Content>
+        <Content style={{ margin: '16px' }}>
+          Content<Button>test</Button>
+        </Content>
       </Layout>
     </Layout>
   );

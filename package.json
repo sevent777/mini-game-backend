@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "cross-env NODE_ENV=development nest start --watch",
-    "serve": "nest build && node ./dist/apps/main/main.js",
+    "serve": "npm run build-web && nest build && node ./dist/apps/main/main.js",
     "eslint": "eslint --fix --max-warnings 0 --ext .ts ./",
     "lint-staged": "lint-staged --allow-empty",
     "start-web": "cd web && npm run dev",
