@@ -6,7 +6,7 @@ import { WebController } from './web.controller';
 @Module({
   imports: [
     ServeStaticModule.forRoot({
-      rootPath: path.join(__dirname, '../../../web/dist'),
+      rootPath: path.join(__dirname, '../../../web/build'),
       exclude: ['/api/(.*)'],
     }),
   ],
