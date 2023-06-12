@@ -7,4 +7,12 @@ export default defineConfig({
     outDir: 'build',
   },
   plugins: [react()],
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:80', // 本地服务器地址
+        changeOrigin: true,
+      },
+    },
+  },
 });

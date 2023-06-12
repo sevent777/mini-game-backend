@@ -1,9 +1,17 @@
 import { Layout } from 'antd';
 
+import { fetcher } from './common/fetcher';
+import { useMount } from './common/hook';
 import { MenuTree } from './container/menu';
 const { Header, Sider, Content } = Layout;
 
 const App = () => {
+  useMount(() => {
+    fetcher.get('/cms/config/list').then((data) => {
+      console.log('data :>> ', data);
+    });
+  });
+
   return (
     <Layout style={{ minHeight: '100vh' }} hasSider>
       <Sider>
