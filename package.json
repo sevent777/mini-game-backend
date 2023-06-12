@@ -9,7 +9,7 @@
     "eslint": "eslint --fix --max-warnings 0 --ext .ts ./",
     "lint-staged": "lint-staged --allow-empty",
     "start-web": "cd web && npm run dev",
-    "build-web": "cd web && npm run build"
+    "build-web": "cd web && npm run build && echo"
   },
   "author": "",
   "license": "Apache-2.0",
@@ -61,6 +61,9 @@
     "*.ts": [
       "npm run eslint",
       "git add"
+    ],
+    "web/**/*": [
+      "npm run build-web"
     ]
   }
 }
