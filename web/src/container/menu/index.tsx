@@ -1,18 +1,16 @@
-import { LaptopOutlined, NotificationOutlined, UserOutlined } from '@ant-design/icons';
 import { Menu } from 'antd';
+import { observer } from 'mobx-react';
 
-export const MenuTree = () => {
+import { configStore } from '@/store/config';
+
+export const MenuTree = observer(() => {
+  console.log('configStore.configList :>> ', configStore.configList);
   return (
-    <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
-      <Menu.Item key="1" icon={<UserOutlined />}>
-        Menu Item 1
-      </Menu.Item>
-      <Menu.Item key="2" icon={<LaptopOutlined />}>
-        Menu Item 2
-      </Menu.Item>
-      <Menu.Item key="3" icon={<NotificationOutlined />}>
-        Menu Item 3
-      </Menu.Item>
-    </Menu>
+    <Menu
+      items={configStore.configList.map((config) => ({
+        label: config.name,
+        key: `${config.type}_${config.name}`,
+      }))}
+    />
   );
-};
+});

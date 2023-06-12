@@ -3,7 +3,8 @@
   "extends": [
     "prettier",
     "eslint:recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended"
   ],
   "plugins": ["@typescript-eslint", "prettier", "simple-import-sort"],
   "parserOptions": {
@@ -22,6 +23,8 @@
     "@typescript-eslint/no-empty-function": ["warn"],
     "@typescript-eslint/no-explicit-any": ["error"],
     "@typescript-eslint/explicit-module-boundary-types": "off",
+    "react/self-closing-comp": "error",
+    "react/react-in-jsx-scope": "off",
     "eqeqeq": "error",
     "prefer-template": "error",
     "simple-import-sort/imports": "error",

@@ -25,5 +25,8 @@ export class ConfigOperationRsp {
 }
 
 export class ConfigListRsp {
+  @ApiProperty({
+    type: [Configuration],
+  })
   list: Configuration[];
 }

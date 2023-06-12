@@ -22,7 +22,15 @@ export interface paths {
 
 export interface components {
   schemas: {
-    ConfigListRsp: { [key: string]: unknown };
+    Configuration: {
+      type: string;
+      name: string;
+      content: { [key: string]: unknown };
+      schema: string;
+    };
+    ConfigListRsp: {
+      list: components['schemas']['Configuration'][];
+    };
     ConfigOperationPayload: {
       name: string;
       type: string;
