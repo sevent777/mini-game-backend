@@ -4,12 +4,17 @@ import { observer } from 'mobx-react';
 import { configStore } from '@/store/config';
 
 export const MenuTree = observer(() => {
-  console.log('configStore.configList :>> ', configStore.configList);
   return (
     <Menu
-      items={configStore.configList.map((config) => ({
-        label: config.name,
-        key: `${config.type}_${config.name}`,
+      theme="dark"
+      mode="inline"
+      items={configStore.configTypeList.map((group) => ({
+        label: group.name,
+        key: `${group.path}_${group.name}`,
+        children: group.configs.map((config) => ({
+          label: config.name,
+          key: config.name,
+        })),
       }))}
     />
   );

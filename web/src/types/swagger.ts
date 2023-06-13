@@ -6,6 +6,12 @@
  */
 
 export interface paths {
+  '/api/cms/config/type/create': {
+    post: operations['CmsController_createType'];
+  };
+  '/api/cms/config/type/update/{id}': {
+    post: operations['CmsController_updateType'];
+  };
   '/api/cms/config/list': {
     get: operations['CmsController_getList'];
   };
@@ -22,18 +28,27 @@ export interface paths {
 
 export interface components {
   schemas: {
+    ConfigTypeOperationPayload: {
+      name: string;
+      path: string;
+    };
     Configuration: {
-      type: string;
       name: string;
       content: { [key: string]: unknown };
       schema: string;
     };
+    ConfigurationType: {
+      path: string;
+      name: string;
+      schema: string;
+      configs: components['schemas']['Configuration'][];
+    };
     ConfigListRsp: {
-      list: components['schemas']['Configuration'][];
+      list: components['schemas']['ConfigurationType'][];
     };
     ConfigOperationPayload: {
       name: string;
-      type: string;
+      configTypeId: number;
       content: { [key: string]: unknown };
       effectiveTime: number;
     };
@@ -53,6 +68,32 @@ export interface components {
 }
 
 export interface operations {
+  CmsController_createType: {
+    parameters: {};
+    responses: {
+      201: unknown;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['ConfigTypeOperationPayload'];
+      };
+    };
+  };
+  CmsController_updateType: {
+    parameters: {
+      path: {
+        id: number;
+      };
+    };
+    responses: {
+      201: unknown;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['ConfigTypeOperationPayload'];
+      };
+    };
+  };
   CmsController_getList: {
     parameters: {};
     responses: {
