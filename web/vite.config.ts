@@ -1,7 +1,6 @@
 import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
 import { defineConfig } from 'vite';
-import babel from 'vite-plugin-babel';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -13,16 +12,7 @@ export default defineConfig({
   build: {
     outDir: 'build',
   },
-  plugins: [
-    react(),
-    babel({
-      babelConfig: {
-        babelrc: false,
-        configFile: false,
-        plugins: [['@babel/plugin-proposal-decorators', { loose: true, version: '2022-03' }]],
-      },
-    }),
-  ],
+  plugins: [react()],
   server: {
     proxy: {
       '/api': {

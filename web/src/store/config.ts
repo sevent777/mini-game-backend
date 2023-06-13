@@ -4,12 +4,10 @@ import { fetchConfigList } from '@/common/api';
 import { IConfiguration } from '@/types/api';
 
 export class ConfigStore {
-  @observable test: unknown = { a: 1 };
   @observable configList: IConfiguration[] = [];
 
   @action.bound
   setConfigList(list: IConfiguration[]) {
-    console.log('configList1 :>> ', list);
     this.configList = list;
   }
 
