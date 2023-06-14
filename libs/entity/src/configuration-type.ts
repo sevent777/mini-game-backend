@@ -12,6 +12,7 @@ import { Configuration } from './configuration';
 
 @Entity()
 export class ConfigurationType {
+  @ApiProperty()
   @PrimaryGeneratedColumn()
   id: number;
 

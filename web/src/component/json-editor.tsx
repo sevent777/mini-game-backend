@@ -7,7 +7,9 @@ import { useMount } from '@/common/hook';
 import styles from './index.module.css';
 
 export type IJsonEditorProps = {
-  value: string;
+  initialValue: string;
+  onChange?: (value: string) => void;
+  onSave?: () => void;
 };
 self.MonacoEnvironment = {
   getWorker: () => new JsonWorker(),
@@ -15,7 +17,7 @@ self.MonacoEnvironment = {
 };
 
 export const JsonEditor = (props: IJsonEditorProps) => {
-  const { value } = props;
+  const { initialValue, onChange, onSave } = props;
   const editorRef = useRef<HTMLDivElement>(null);
 
   useMount(() => {
@@ -23,14 +25,19 @@ export const JsonEditor = (props: IJsonEditorProps) => {
       return;
     }
     const editor = monaco.editor.create(editorRef.current, {
-      value,
+      value: initialValue,
       language: 'json',
       automaticLayout: true,
     });
     const model = editor.getModel();
+    model.onDidChangeContent(() => {
+      onChange?.(model.getValue());
+    });
     monaco.editor.setModelLanguage(model, 'json');
 
-    editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS, function () {});
+    editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS, function () {
+      onSave?.();
+    });
 
     return () => {
       editor.dispose();

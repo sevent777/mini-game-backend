@@ -12,6 +12,7 @@ import { ConfigurationType } from './configuration-type';
 
 @Entity()
 export class Configuration {
+  @ApiProperty()
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -27,13 +28,6 @@ export class Configuration {
     type: 'json',
   })
   content: object;
-
-  @ApiProperty()
-  @Column({
-    type: 'json',
-    nullable: true,
-  })
-  schema: string;
 
   @CreateDateColumn()
   createdAt: Date;

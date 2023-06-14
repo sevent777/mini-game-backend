@@ -15,7 +15,6 @@
     "experimentalDecorators": true,
     "declaration": false,
     "removeComments": true,
-    "strict": true,
     "strictPropertyInitialization": false,
     "paths": {
       "@app/constant": [

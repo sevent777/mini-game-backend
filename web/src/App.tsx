@@ -3,7 +3,6 @@ import { Layout, Space, Typography } from 'antd';
 
 import { useMount } from './common/hook';
 import { AppContent } from './container/content';
-import { AppHeader } from './container/header';
 import { MenuTree } from './container/menu';
 import styles from './index.module.css';
 import { configStore } from './store/config';
@@ -25,10 +24,7 @@ const App = () => {
         </Space>
         <MenuTree />
       </Sider>
-      <Layout>
-        <AppHeader />
-        <AppContent />
-      </Layout>
+      <AppContent />
     </Layout>
   );
 };

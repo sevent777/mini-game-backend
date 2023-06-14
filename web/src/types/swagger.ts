@@ -33,11 +33,12 @@ export interface components {
       path: string;
     };
     Configuration: {
+      id: number;
       name: string;
       content: { [key: string]: unknown };
-      schema: string;
     };
     ConfigurationType: {
+      id: number;
       path: string;
       name: string;
       schema: string;

@@ -29,12 +29,18 @@ export class CmsService {
   }
 
   async createOrUpdateConfig(configInfo: Partial<Configuration>) {
-    const config = new Configuration();
+    const existingConfig = await this.findConfig(configInfo.id);
+    const config = existingConfig ?? new Configuration();
     Object.assign(config, pick(configInfo, ['name', 'content', 'effectiveTime', 'configType']));
+    console.log('config :>> ', config);
+    console.log('configInfo :>> ', configInfo);
     return this.configurationRepository.save(config);
   }
 
   async findConfigType(id: number): Promise<ConfigurationType> {
+    if (!id) {
+      return;
+    }
     const config = await this.configurationTypeRepository.findOne({
       where: [
         {
@@ -49,26 +55,21 @@ export class CmsService {
     return config;
   }
 
-  // createConfig(configInfo: Partial<Configuration>): Promise<Configuration> {
-  //   const config = new Configuration();
-  //   Object.assign(config, configInfo);
-  //   return this.configurationRepository.save(config);
-  // }
+  async findConfig(id: number): Promise<Configuration> {
+    if (!id) {
+      return;
+    }
+    const config = await this.configurationRepository.findOne({
+      where: [
+        {
+          id,
+        },
+      ],
+    });
 
-  // async updateConfig(configInfo: Partial<Configuration>): Promise<Configuration> {
-  //   const config = await this.configurationRepository.findOne({
-  //     where: [
-  //       {
-  //         id: configInfo.id,
-  //       },
-  //     ],
-  //   });
-
-  //   if (!config) {
-  //     throw new NotFoundException();
-  //   }
-
-  //   Object.assign(config, pick(configInfo, ['content', 'effectiveTime', 'type', 'name']));
-  //   return this.configurationRepository.save(config);
-  // }
+    if (!config) {
+      throw new NotFoundException();
+    }
+    return config;
+  }
 }
