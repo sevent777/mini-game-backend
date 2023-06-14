@@ -3,30 +3,25 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
-import { ConfigurationType } from './configuration-type';
+import { Configuration } from './configuration';
 
 @Entity()
-export class Configuration {
+export class ConfigurationType {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => ConfigurationType, (configType) => configType.configs)
-  configType: ConfigurationType;
+  @ApiProperty()
+  @Column()
+  path: string;
 
   @ApiProperty()
   @Column()
   name: string;
-
-  @ApiProperty()
-  @Column({
-    type: 'json',
-  })
-  content: object;
 
   @ApiProperty()
   @Column({
@@ -41,6 +36,9 @@ export class Configuration {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @Column({ type: 'datetime' })
-  effectiveTime: Date;
+  @ApiProperty({
+    type: () => [Configuration],
+  })
+  @OneToMany(() => Configuration, (config) => config.configType)
+  configs: Configuration[];
 }

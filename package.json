@@ -34,7 +34,6 @@
     "lodash": "^4.17.21",
     "mysql2": "^2.3.3",
     "rxjs": "^7.8.1",
-    "sequelize": "^6.13.0",
     "typeorm": "^0.3.16"
   },
   "devDependencies": {

@@ -1,6 +1,17 @@
 import { Configuration } from '@app/entity';
+import { ConfigurationType } from '@app/entity/configuration-type';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNumber, IsObject, IsString } from 'class-validator';
+
+export class ConfigTypeOperationPayload {
+  @ApiProperty()
+  @IsString()
+  name: string;
+
+  @ApiProperty()
+  @IsString()
+  path: string;
+}
 
 export class ConfigOperationPayload {
   @ApiProperty()
@@ -8,8 +19,8 @@ export class ConfigOperationPayload {
   name: string;
 
   @ApiProperty()
-  @IsString()
-  type: string;
+  @IsNumber()
+  configTypeId: number;
 
   @ApiProperty()
   @IsObject()
@@ -26,7 +37,7 @@ export class ConfigOperationRsp {
 
 export class ConfigListRsp {
   @ApiProperty({
-    type: [Configuration],
+    type: [ConfigurationType],
   })
-  list: Configuration[];
+  list: ConfigurationType[];
 }
