@@ -1,9 +1,13 @@
-import { Layout, Typography } from 'antd';
+import { HddTwoTone } from '@ant-design/icons';
+import { Layout, Space, Typography } from 'antd';
 
 import { useMount } from './common/hook';
+import { AppContent } from './container/content';
+import { AppHeader } from './container/header';
 import { MenuTree } from './container/menu';
+import styles from './index.module.css';
 import { configStore } from './store/config';
-const { Header, Sider, Content } = Layout;
+const { Sider } = Layout;
 
 const App = () => {
   useMount(() => {
@@ -12,21 +16,18 @@ const App = () => {
 
   return (
     <Layout style={{ minHeight: '100vh' }} hasSider>
-      <Sider>
-        <Typography.Title
-          level={2}
-          style={{
-            padding: '0 16px',
-            color: '#fff',
-          }}
-        >
-          Jax 2.0
-        </Typography.Title>
+      <Sider theme="light" className={styles.sider} width={240}>
+        <Space className={styles.menuTop} align="center">
+          <HddTwoTone />
+          <Typography.Title level={4} className={styles.title} style={{ display: 'block' }}>
+            Jax 2.0
+          </Typography.Title>
+        </Space>
         <MenuTree />
       </Sider>
       <Layout>
-        <Header style={{ background: '#fff', padding: 0 }}>Header</Header>
-        <Content style={{ margin: '16px' }}>Content</Content>
+        <AppHeader />
+        <AppContent />
       </Layout>
     </Layout>
   );

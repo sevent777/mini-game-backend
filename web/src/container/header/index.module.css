@@ -1,0 +1,19 @@
+.header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  padding: 0 24px;
+  background: linear-gradient(90deg, #dbe9f6, #f6e6db);
+}
+
+.title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.actionBar {
+  display: flex;
+  gap: 12px;
+}

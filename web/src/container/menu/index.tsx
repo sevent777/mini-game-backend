@@ -3,10 +3,15 @@ import { observer } from 'mobx-react';
 
 import { configStore } from '@/store/config';
 
+import styles from './index.module.css';
+
 export const MenuTree = observer(() => {
   return (
     <Menu
-      theme="dark"
+      style={{
+        border: 'none',
+      }}
+      className={styles.menu}
       mode="inline"
       items={configStore.configTypeList.map((group) => ({
         label: group.name,
