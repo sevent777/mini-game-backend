@@ -1,7 +1,7 @@
 import { Configuration } from '@app/entity';
 import { ConfigurationType } from '@app/entity/configuration-type';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNumber, IsObject, IsString } from 'class-validator';
+import { IsNumber, IsObject, IsOptional, IsString } from 'class-validator';
 
 export class ConfigTypeOperationPayload {
   @ApiProperty()
@@ -27,8 +27,9 @@ export class ConfigOperationPayload {
   content: object;
 
   @ApiProperty()
+  @IsOptional()
   @IsNumber()
-  effectiveTime: number;
+  effectiveTime?: number;
 }
 
 export class ConfigOperationRsp {

@@ -1,8 +1,8 @@
 import { Configuration } from '@app/entity';
 import { ConfigurationType } from '@app/entity/configuration-type';
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { pick } from 'lodash';
+import { isNumber, pick } from 'lodash';
 import { Repository } from 'typeorm';
 
 @Injectable()
@@ -71,5 +71,14 @@ export class CmsService {
       throw new NotFoundException();
     }
     return config;
+  }
+
+  async deleteConfig(id: number) {
+    if (!isNumber(id)) {
+      throw new BadRequestException();
+    }
+    return this.configurationRepository.delete({
+      id,
+    });
   }
 }

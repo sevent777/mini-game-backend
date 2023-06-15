@@ -1,7 +1,7 @@
 import { message } from 'antd';
 import { action, computed, observable } from 'mobx';
 
-import { fetchConfigList, saveConfig } from '@/common/api';
+import { addNewConfig, deleteConfig, fetchConfigList, saveConfig } from '@/common/api';
 import { IConfiguration, IConfigurationType } from '@/types/api';
 import { formatJSON } from '@/utils';
 
@@ -34,9 +34,27 @@ export class ConfigStore {
       await saveConfig(this.activeConfig.id, {
         content,
       });
+      message.success('Successfully saved!');
     } catch (e) {
-      message.error('格式异常!');
+      message.error('Format error!');
     }
+  }
+
+  @action.bound
+  async addNewConfig(data) {
+    await addNewConfig({
+      content: {},
+      ...data,
+    });
+    await this.fetchConfigList();
+    message.success('Successfully added!');
+  }
+
+  @action.bound
+  async deleteConfig(configID: number) {
+    await deleteConfig(configID);
+    await this.fetchConfigList();
+    message.success('Successfully deleted!');
   }
 
   @action.bound
@@ -57,9 +75,6 @@ export class ConfigStore {
   fetchConfigList() {
     fetchConfigList().then(({ list }) => {
       this.setConfigList(list);
-      setTimeout(() => {
-        this.setConfigList(list);
-      }, 2000);
     });
   }
 }

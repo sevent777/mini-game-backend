@@ -85,4 +85,9 @@ export class CmsController {
     };
     return this.cmsService.createOrUpdateConfig(config);
   }
+
+  @Post('delete/:id')
+  async delete(@Param('id', new ParseIntPipe()) id: number) {
+    return this.cmsService.deleteConfig(id);
+  }
 }

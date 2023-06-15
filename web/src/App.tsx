@@ -4,6 +4,7 @@ import { Layout, Space, Typography } from 'antd';
 import { useMount } from './common/hook';
 import { AppContent } from './container/content';
 import { MenuTree } from './container/menu';
+import { ModalContainer } from './container/modal';
 import styles from './index.module.css';
 import { configStore } from './store/config';
 const { Sider } = Layout;
@@ -25,6 +26,7 @@ const App = () => {
         <MenuTree />
       </Sider>
       <AppContent />
+      <ModalContainer />
     </Layout>
   );
 };

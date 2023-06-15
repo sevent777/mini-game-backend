@@ -19,7 +19,15 @@ export default defineConfig({
       },
     },
   },
-  plugins: [react()],
+  plugins: [
+    react({
+      babel: {
+        parserOpts: {
+          plugins: ['decorators-legacy', 'classProperties'],
+        },
+      },
+    }),
+  ],
   server: {
     proxy: {
       '/api': {
