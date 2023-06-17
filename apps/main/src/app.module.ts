@@ -12,6 +12,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { CmsModule } from './cms/cms.module';
+import { DetectiveModule } from './detective/detective.module';
 import { UserModule } from './user/user.module';
 import { WebModule } from './web/web.module';
 
@@ -36,6 +37,7 @@ import { WebModule } from './web/web.module';
     CmsModule,
     UserModule,
     WebModule,
+    DetectiveModule,
   ],
 })
 export class AppModule {

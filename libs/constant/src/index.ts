@@ -1,4 +1,5 @@
 export * from './env';
+export * from './game';
 
 export const DATABASE_NAME = 'mini_game';
 

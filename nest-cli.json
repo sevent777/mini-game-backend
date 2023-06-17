@@ -47,6 +47,15 @@
       "compilerOptions": {
         "tsConfigPath": "libs/entity/tsconfig.lib.json"
       }
+    },
+    "service": {
+      "type": "library",
+      "root": "libs/service",
+      "entryFile": "index",
+      "sourceRoot": "libs/service/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/service/tsconfig.lib.json"
+      }
     }
   }
 }

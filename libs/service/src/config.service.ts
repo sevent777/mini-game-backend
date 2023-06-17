@@ -6,7 +6,7 @@ import { isNumber, pick } from 'lodash';
 import { Repository } from 'typeorm';
 
 @Injectable()
-export class CmsService {
+export class ConfigService {
   constructor(
     @InjectRepository(Configuration)
     private readonly configurationRepository: Repository<Configuration>,
@@ -32,8 +32,6 @@ export class CmsService {
     const existingConfig = await this.findConfig(configInfo.id);
     const config = existingConfig ?? new Configuration();
     Object.assign(config, pick(configInfo, ['name', 'content', 'effectiveTime', 'configType']));
-    console.log('config :>> ', config);
-    console.log('configInfo :>> ', configInfo);
     return this.configurationRepository.save(config);
   }
 

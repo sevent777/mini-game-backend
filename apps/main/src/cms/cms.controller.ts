@@ -1,5 +1,6 @@
 import { TimestampToDatePipe } from '@app/core';
 import { Configuration } from '@app/entity';
+import { ConfigService } from '@app/service';
 import {
   Body,
   Controller,
@@ -13,20 +14,19 @@ import {
 import { ApiResponse } from '@nestjs/swagger';
 
 import { AuthGuard } from './cms.guard';
-import { CmsService } from './cms.service';
 import { ConfigListRsp, ConfigOperationPayload, ConfigTypeOperationPayload } from './dto/config';
 
 @Controller('cms/config')
 @UseGuards(new AuthGuard())
 export class CmsController {
-  constructor(private readonly cmsService: CmsService) {}
+  constructor(private readonly configService: ConfigService) {}
 
   @Post('type/create')
   createType(
     @Body(new ValidationPipe())
     createConfigTypePayload: ConfigTypeOperationPayload
   ) {
-    return this.cmsService.createOrUpdateConfigType(createConfigTypePayload);
+    return this.configService.createOrUpdateConfigType(createConfigTypePayload);
   }
 
   @Post('type/update/:id')
@@ -39,7 +39,7 @@ export class CmsController {
       id,
       ...updateconfigTypePayload,
     };
-    return this.cmsService.createOrUpdateConfigType(config);
+    return this.configService.createOrUpdateConfigType(config);
   }
 
   @ApiResponse({
@@ -48,7 +48,7 @@ export class CmsController {
   })
   @Get('list')
   async getList(): Promise<ConfigListRsp> {
-    const list = await this.cmsService.getTypeList();
+    const list = await this.configService.getTypeList();
     return {
       list,
     };
@@ -60,13 +60,13 @@ export class CmsController {
     createConfigPayload: ConfigOperationPayload,
     @Body('effectiveTime', TimestampToDatePipe) effectiveTime: Date
   ) {
-    const configType = await this.cmsService.findConfigType(createConfigPayload.configTypeId);
+    const configType = await this.configService.findConfigType(createConfigPayload.configTypeId);
     const config: Partial<Configuration> = {
       ...createConfigPayload,
       effectiveTime,
       configType,
     };
-    return this.cmsService.createOrUpdateConfig(config);
+    return this.configService.createOrUpdateConfig(config);
   }
 
   @Post('update/:id')
@@ -76,18 +76,18 @@ export class CmsController {
     @Body('effectiveTime', TimestampToDatePipe) effectiveTime: Date,
     @Param('id', new ParseIntPipe()) id: number
   ) {
-    const configType = await this.cmsService.findConfigType(updateOperation.configTypeId);
+    const configType = await this.configService.findConfigType(updateOperation.configTypeId);
     const config = {
       id,
       ...updateOperation,
       effectiveTime,
       configType,
     };
-    return this.cmsService.createOrUpdateConfig(config);
+    return this.configService.createOrUpdateConfig(config);
   }
 
   @Post('delete/:id')
   async delete(@Param('id', new ParseIntPipe()) id: number) {
-    return this.cmsService.deleteConfig(id);
+    return this.configService.deleteConfig(id);
   }
 }
