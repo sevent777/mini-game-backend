@@ -1,12 +1,12 @@
 import { ACCESS_TOKEN_KEY } from '@app/constant';
 import { genRspJson, UserID } from '@app/core';
+import { UserService } from '@app/service/user.service';
 import { Body, Controller, Headers, Post, Req, Res, ValidationPipe } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Request, Response } from 'express';
 
 import { LoginPayload, LoginResponse } from './user.dto';
-import { UserService } from './user.service';
 
 @ApiTags('user')
 @Controller('user')

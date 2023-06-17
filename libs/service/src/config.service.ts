@@ -3,7 +3,7 @@ import { ConfigurationType } from '@app/entity/configuration-type';
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { isNumber, pick } from 'lodash';
-import { Repository } from 'typeorm';
+import { FindManyOptions, Repository } from 'typeorm';
 
 export enum ConfigPath {
   dailyDetective = 'dailyDetective',
@@ -75,7 +75,10 @@ export class ConfigService {
     return config;
   }
 
-  async getConfigs(path: ConfigPath): Promise<Configuration[]> {
+  async getConfigs(
+    path: ConfigPath,
+    options?: FindManyOptions<Configuration>
+  ): Promise<Configuration[]> {
     const configs = await this.configurationRepo.find({
       where: [
         {
@@ -84,8 +87,9 @@ export class ConfigService {
           },
         },
       ],
+      ...options,
     });
-    if (!configs.length) {
+    if (!configs?.length) {
       throw new NotFoundException();
     }
     return configs;

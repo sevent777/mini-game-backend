@@ -8,22 +8,19 @@ import { ExtendedRequest } from './context';
 @Injectable()
 export class LoginMiddleware implements NestMiddleware {
   constructor(private readonly jwtService: JwtService) {}
-  use(req: ExtendedRequest, res: Response, next: NextFunction) {
+  async use(req: ExtendedRequest, res: Response, next: NextFunction) {
     const { cookies } = req;
-    const accessToken = cookies[ACCESS_TOKEN_KEY];
-    if (!accessToken) {
-      next();
+    try {
+      const accessToken = cookies[ACCESS_TOKEN_KEY];
+      if (accessToken) {
+        const decoded = await this.jwtService.verifyAsync(accessToken);
+        req.userID = decoded?.id;
+        next();
+        return;
+      }
+    } catch (e) {
+      console.error(e);
     }
-    if (accessToken) {
-      this.jwtService
-        .verifyAsync(accessToken)
-        .then((decoded) => {
-          req.userID = decoded?.id;
-          next();
-        })
-        .catch(() => {
-          next();
-        });
-    }
+    next();
   }
 }

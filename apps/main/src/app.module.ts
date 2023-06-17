@@ -7,12 +7,14 @@ import {
   MYSQL_USERNAME,
 } from '@app/constant';
 import { LoginMiddleware } from '@app/core';
+import { Configuration, ConfigurationType, User } from '@app/entity';
 import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { CmsModule } from './cms/cms.module';
 import { DetectiveModule } from './detective/detective.module';
+import { GameModule } from './game/game.module';
 import { UserModule } from './user/user.module';
 import { WebModule } from './web/web.module';
 
@@ -29,6 +31,7 @@ import { WebModule } from './web/web.module';
       synchronize: true,
       logging: true,
     }),
+    TypeOrmModule.forFeature([User, ConfigurationType, Configuration]),
     JwtModule.register({
       global: true,
       secret: JWT_SECRET,
@@ -38,6 +41,7 @@ import { WebModule } from './web/web.module';
     UserModule,
     WebModule,
     DetectiveModule,
+    GameModule,
   ],
 })
 export class AppModule {
