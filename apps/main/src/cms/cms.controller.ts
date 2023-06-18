@@ -1,6 +1,6 @@
+import { ConfigService } from '@app/config';
 import { TimestampToDatePipe } from '@app/core';
 import { Configuration } from '@app/entity';
-import { ConfigService } from '@app/service';
 import {
   Body,
   Controller,

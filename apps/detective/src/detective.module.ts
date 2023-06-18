@@ -1,14 +1,11 @@
-import { Configuration } from '@app/entity';
-import { ConfigurationType } from '@app/entity/configuration-type';
-import { ConfigService } from '@app/service';
+import { ConfigModule, ConfigService } from '@app/config';
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { DetectiveController } from './detective.controller';
 import { DetectiveService } from './detective.service';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([ConfigurationType, Configuration])],
+  imports: [ConfigModule],
   controllers: [DetectiveController],
   providers: [ConfigService, DetectiveService],
 })

@@ -1,5 +1,5 @@
+import { ConfigPath, ConfigService } from '@app/config';
 import { GameName } from '@app/constant';
-import { ConfigPath, ConfigService } from '@app/service';
 import { Controller, Get } from '@nestjs/common';
 import { ApiResponse } from '@nestjs/swagger';
 

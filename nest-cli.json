@@ -48,13 +48,31 @@
         "tsConfigPath": "libs/entity/tsconfig.lib.json"
       }
     },
-    "service": {
-      "type": "library",
-      "root": "libs/service",
-      "entryFile": "index",
-      "sourceRoot": "libs/service/src",
+    "detective": {
+      "type": "application",
+      "root": "apps/detective",
+      "entryFile": "main",
+      "sourceRoot": "apps/detective/src",
       "compilerOptions": {
-        "tsConfigPath": "libs/service/tsconfig.lib.json"
+        "tsConfigPath": "apps/detective/tsconfig.app.json"
+      }
+    },
+    "config": {
+      "type": "library",
+      "root": "libs/config",
+      "entryFile": "index",
+      "sourceRoot": "libs/config/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/config/tsconfig.lib.json"
+      }
+    },
+    "user": {
+      "type": "library",
+      "root": "libs/user",
+      "entryFile": "index",
+      "sourceRoot": "libs/user/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/user/tsconfig.lib.json"
       }
     }
   }

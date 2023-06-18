@@ -11,9 +11,9 @@ import { Configuration, ConfigurationType, User } from '@app/entity';
 import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { DataSource } from 'typeorm';
 
 import { CmsModule } from './cms/cms.module';
-import { DetectiveModule } from './detective/detective.module';
 import { GameModule } from './game/game.module';
 import { UserModule } from './user/user.module';
 import { WebModule } from './web/web.module';
@@ -30,21 +30,22 @@ import { WebModule } from './web/web.module';
       autoLoadEntities: true,
       synchronize: true,
       logging: true,
+      entities: [User, ConfigurationType, Configuration],
     }),
     TypeOrmModule.forFeature([User, ConfigurationType, Configuration]),
+    CmsModule,
+    WebModule,
     JwtModule.register({
       global: true,
       secret: JWT_SECRET,
       signOptions: { expiresIn: '7d' },
     }),
-    CmsModule,
     UserModule,
-    WebModule,
-    DetectiveModule,
     GameModule,
   ],
 })
 export class AppModule {
+  constructor(private dataSource: DataSource) {}
   configure(consumer: MiddlewareConsumer) {
     consumer.apply(LoginMiddleware).forRoutes('*');
   }

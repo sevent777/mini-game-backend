@@ -1,13 +1,10 @@
-import { Configuration } from '@app/entity';
-import { ConfigurationType } from '@app/entity/configuration-type';
-import { ConfigService } from '@app/service';
+import { ConfigModule, ConfigService } from '@app/config';
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { CmsController } from './cms.controller';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([ConfigurationType, Configuration])],
+  imports: [ConfigModule],
   controllers: [CmsController],
   providers: [ConfigService],
 })

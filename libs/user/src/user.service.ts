@@ -4,7 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { pick } from 'lodash';
 import { FindOptionsWhere, Repository } from 'typeorm';
 
-import { LoginPayload } from './dto';
+import { LoginPayload } from './user.dto';
 
 @Injectable()
 export class UserService {

@@ -35,11 +35,17 @@
       "@app/entity/*": [
         "libs/entity/src/*"
       ],
-      "@app/service": [
-        "libs/service/src"
+      "@app/config": [
+        "libs/config/src"
       ],
-      "@app/service/*": [
-        "libs/service/src/*"
+      "@app/config/*": [
+        "libs/config/src/*"
+      ],
+      "@app/user": [
+        "libs/user/src"
+      ],
+      "@app/user/*": [
+        "libs/user/src/*"
       ]
     }
   }
