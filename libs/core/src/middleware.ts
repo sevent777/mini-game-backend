@@ -1,4 +1,5 @@
 import { ACCESS_TOKEN_KEY } from '@app/constant';
+import { UserService } from '@app/user';
 import { Injectable, NestMiddleware } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { NextFunction, Response } from 'express';
@@ -7,7 +8,7 @@ import { ExtendedRequest } from './context';
 
 @Injectable()
 export class LoginMiddleware implements NestMiddleware {
-  constructor(private readonly jwtService: JwtService) {}
+  constructor(private readonly jwtService: JwtService, private readonly userService: UserService) {}
   async use(req: ExtendedRequest, res: Response, next: NextFunction) {
     const { cookies } = req;
     try {
@@ -21,6 +22,15 @@ export class LoginMiddleware implements NestMiddleware {
     } catch (e) {
       console.error(e);
     }
+
+    const wxUser = await this.userService.searchExistingUsers({
+      wxOpenid: req.headers['x-wx-openid'] as string,
+    });
+
+    if (wxUser) {
+      req.userID = wxUser.id;
+    }
+
     next();
   }
 }

@@ -15,6 +15,7 @@ export class User {
 
   @Column({
     nullable: true,
+    unique: true,
   })
   wxOpenid?: string;
 

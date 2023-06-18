@@ -6,12 +6,10 @@ import {
   MYSQL_PORT,
   MYSQL_USERNAME,
 } from '@app/constant';
-import { LoginMiddleware } from '@app/core';
 import { Configuration, ConfigurationType, User } from '@app/entity';
-import { MiddlewareConsumer, Module } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { DataSource } from 'typeorm';
 
 import { CmsModule } from './cms/cms.module';
 import { GameModule } from './game/game.module';
@@ -44,9 +42,4 @@ import { WebModule } from './web/web.module';
     GameModule,
   ],
 })
-export class AppModule {
-  constructor(private dataSource: DataSource) {}
-  configure(consumer: MiddlewareConsumer) {
-    consumer.apply(LoginMiddleware).forRoutes('*');
-  }
-}
+export class AppModule {}

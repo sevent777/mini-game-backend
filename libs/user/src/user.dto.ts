@@ -5,22 +5,22 @@ import { IsNumber, IsOptional, IsString } from 'class-validator';
 export class LoginPayload {
   @IsNumber()
   @IsOptional()
-  id: number;
+  id?: number;
 
   @ApiProperty()
   @IsOptional()
   @IsString()
-  name: string;
+  name?: string;
 
   @ApiProperty()
   @IsOptional()
   @IsString()
-  wxOpenid: string;
+  wxOpenid?: string;
 
   @ApiProperty()
   @IsString()
   @IsOptional()
-  avatarUrl: string;
+  avatarUrl?: string;
 }
 
 export class LoginResponse {
