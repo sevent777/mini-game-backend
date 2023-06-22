@@ -4,7 +4,7 @@ import { Controller, Get } from '@nestjs/common';
 import { ApiResponse } from '@nestjs/swagger';
 
 import { DetectiveService } from './detective.service';
-import { DailyTestInfo } from './dto/daily';
+import { DailyTestInfo, DetectiveTestList } from './dto/daily';
 
 @Controller(GameName.detective)
 export class DetectiveController {
@@ -28,6 +28,10 @@ export class DetectiveController {
     };
   }
 
+  @ApiResponse({
+    status: 200,
+    type: DetectiveTestList,
+  })
   @Get('/mini/test-list')
   async getMiniDetectiveTestList() {
     const list = await this.configService.getConfigs(ConfigPath.miniDetective);

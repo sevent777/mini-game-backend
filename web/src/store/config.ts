@@ -55,6 +55,9 @@ export class ConfigStore {
   async deleteConfig(configID: number) {
     await deleteConfig(configID);
     await this.fetchConfigList();
+    if (this.activeConfig.id === configID) {
+      this.setSelectedKeys([]);
+    }
     message.success('Successfully deleted!');
   }
 
@@ -62,13 +65,17 @@ export class ConfigStore {
   setConfigList(list: IConfigurationType[]) {
     this.configTypeList = list;
     this.defaultOpenKeys = [String(list[0]?.id)];
-    this.setSelectedKeys([String(list[0]?.configs?.[0]?.id)]);
   }
 
   @action.bound
   setSelectedKeys(selectedKeys: string[]) {
     const [configID] = selectedKeys;
     this.selectedKeys = selectedKeys;
+    if (!configID) {
+      this.activeConfig = null;
+      this.setTempValue(null);
+      return;
+    }
     this.activeConfig = this.configsMap[configID];
     this.setTempValue(formatJSON(configStore.activeConfig.content));
   }
