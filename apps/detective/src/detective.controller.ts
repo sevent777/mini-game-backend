@@ -27,4 +27,12 @@ export class DetectiveController {
       testInfo,
     };
   }
+
+  @Get('/mini/test-list')
+  async getMiniDetectiveTestList() {
+    const list = await this.configService.getConfigs(ConfigPath.miniDetective);
+    return {
+      list,
+    };
+  }
 }

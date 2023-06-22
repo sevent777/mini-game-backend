@@ -3,7 +3,7 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class DailyTestInfo {
   @ApiProperty({
-    type: [Configuration],
+    type: Configuration,
   })
   testInfo: Configuration;
 }

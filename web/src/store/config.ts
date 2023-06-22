@@ -34,6 +34,7 @@ export class ConfigStore {
       await saveConfig(this.activeConfig.id, {
         content,
       });
+      this.fetchConfigList();
       message.success('Successfully saved!');
     } catch (e) {
       message.error('Format error!');

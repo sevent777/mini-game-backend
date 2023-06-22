@@ -7,6 +7,7 @@ import { FindManyOptions, Repository } from 'typeorm';
 
 export enum ConfigPath {
   dailyDetective = 'dailyDetective',
+  miniDetective = 'miniDetective',
 }
 
 @Injectable()
@@ -75,10 +76,7 @@ export class ConfigService {
     return config;
   }
 
-  async getConfigs(
-    path: ConfigPath,
-    options?: FindManyOptions<Configuration>
-  ): Promise<Configuration[]> {
+  async getConfigs(path: ConfigPath, options?: FindManyOptions<Configuration>): Promise<object[]> {
     const configs = await this.configurationRepo.find({
       where: [
         {
