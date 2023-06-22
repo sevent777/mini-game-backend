@@ -63,7 +63,8 @@
       "git add"
     ],
     "web/**/*": [
-      "npm run build-web"
+      "npm run build-web",
+      "git add"
     ]
   }
 }

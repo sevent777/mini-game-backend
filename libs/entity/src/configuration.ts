@@ -3,6 +3,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  Generated,
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -15,6 +16,11 @@ export class Configuration {
   @ApiProperty()
   @PrimaryGeneratedColumn()
   id: number;
+
+  @ApiProperty()
+  @Column()
+  @Generated('uuid')
+  key: string;
 
   @ManyToOne(() => ConfigurationType, (configType) => configType.configs)
   configType: ConfigurationType;
