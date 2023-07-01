@@ -6,9 +6,7 @@ export class DetectiveTestInfo extends Configuration {
   finished: boolean;
 }
 export class DailyTestInfo {
-  @ApiProperty({
-    type: DetectiveTestInfo,
-  })
+  @ApiProperty()
   testInfo: DetectiveTestInfo;
 }
 
