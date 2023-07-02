@@ -55,13 +55,14 @@ export const MenuTree = observer(() => {
         key: `${group.id}`,
         children: group.configs.map((config) => ({
           label: (
-            <Space className={styles.title}>
-              {config.name}
+            <div className={styles.menuItem}>
+              <div className={styles.title}>{config.name}</div>
               {configStore.activeConfig?.id === config.id && (
                 <DeleteOutlined onClick={() => onClickDelete(config.id)} />
               )}
-            </Space>
+            </div>
           ),
+          title: config.name,
           key: String(config.id),
         })),
       }))}

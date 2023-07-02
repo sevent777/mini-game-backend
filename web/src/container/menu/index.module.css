@@ -1,9 +1,18 @@
 .menu {
   border-inline-end: none;
 
-  .title {
+  .menuItem {
+    display: flex;
     justify-content: space-between;
     width: 100%;
     padding-right: 8px;
+    box-sizing: border-box;
+    align-items: center;
+
+    .title {
+      flex: 1 1 auto;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
 }
