@@ -1,7 +1,7 @@
 export * from './env';
 export * from './game';
 
-export const DATABASE_NAME = 'mini_game';
+export const MAIN_DATABASE_NAME = 'mini_game';
 
 export const CookiePrefix = 'mini_game';
 

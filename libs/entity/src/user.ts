@@ -1,7 +1,10 @@
+import { MAIN_DATABASE_NAME } from '@app/constant';
 import { ApiProperty } from '@nestjs/swagger';
 import { Column, CreateDateColumn, Entity, Generated, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity()
+@Entity({
+  database: MAIN_DATABASE_NAME,
+})
 export class User {
   @PrimaryGeneratedColumn()
   id: number;

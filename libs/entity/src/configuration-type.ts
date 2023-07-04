@@ -1,3 +1,4 @@
+import { MAIN_DATABASE_NAME } from '@app/constant';
 import { ApiProperty } from '@nestjs/swagger';
 import {
   Column,
@@ -10,7 +11,9 @@ import {
 
 import { Configuration } from './configuration';
 
-@Entity()
+@Entity({
+  database: MAIN_DATABASE_NAME,
+})
 export class ConfigurationType {
   @ApiProperty()
   @PrimaryGeneratedColumn()
