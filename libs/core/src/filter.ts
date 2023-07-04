@@ -14,6 +14,8 @@ export class AllExceptionsFilter implements ExceptionFilter {
 
     const message = exception instanceof Error ? exception.message : 'Internal server error';
 
+    console.error(exception);
+
     response.json({
       statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
       timestamp: new Date().toISOString(),

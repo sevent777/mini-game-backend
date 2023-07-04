@@ -43,7 +43,6 @@ export class CmsController {
   }
 
   @ApiResponse({
-    status: 200,
     type: ConfigListRsp,
   })
   @Get('list')

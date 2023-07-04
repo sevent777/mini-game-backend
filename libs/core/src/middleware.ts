@@ -15,7 +15,7 @@ export class LoginMiddleware implements NestMiddleware {
       const accessToken = cookies[ACCESS_TOKEN_KEY];
       if (accessToken) {
         const decoded = await this.jwtService.verifyAsync(accessToken);
-        req.userID = decoded?.id;
+        req.userID = Number(decoded?.id);
         next();
         return;
       }

@@ -1,10 +1,10 @@
 import { ConfigPath, ConfigService } from '@app/config';
 import { GameName } from '@app/constant';
-import { Controller, Get } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseIntPipe, Post, ValidationPipe } from '@nestjs/common';
 import { ApiResponse } from '@nestjs/swagger';
 
 import { DetectiveService } from './detective.service';
-import { DailyTestInfo, DetectiveTestList } from './dto/daily';
+import { DailyTestInfo, DetectiveTestList, SubmitAnswerInfo } from './dto';
 
 @Controller(GameName.detective)
 export class DetectiveController {
@@ -14,7 +14,6 @@ export class DetectiveController {
   ) {}
 
   @ApiResponse({
-    status: 200,
     type: DailyTestInfo,
   })
   @Get('/daily/info')
@@ -29,7 +28,6 @@ export class DetectiveController {
   }
 
   @ApiResponse({
-    status: 200,
     type: DetectiveTestList,
   })
   @Get('/mini/test-list')
@@ -38,5 +36,14 @@ export class DetectiveController {
     return {
       list,
     };
+  }
+
+  @Post('/submit-answer/:id')
+  async submitAnswer(
+    @Body(new ValidationPipe())
+    info: SubmitAnswerInfo,
+    @Param('id', new ParseIntPipe()) id: number
+  ) {
+    return this.detectiveService.submitAnswer(id, info);
   }
 }

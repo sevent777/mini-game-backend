@@ -1,1 +1,1 @@
-export * from './question-answer-record';
+export * from './answer-record';

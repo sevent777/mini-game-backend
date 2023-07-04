@@ -1,6 +1,7 @@
 import { ConfigModule, ConfigService } from '@app/config';
 import { DBName } from '@app/constant';
-import { AnswerRecord, getTypeormRootModule } from '@app/entity';
+import { AnswerRecord, BaseTypeOrmModuleOptions } from '@app/entity';
+import { UserModule } from '@app/user';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
@@ -9,9 +10,15 @@ import { DetectiveService } from './detective.service';
 
 @Module({
   imports: [
+    TypeOrmModule.forRoot({
+      ...BaseTypeOrmModuleOptions,
+      database: DBName.detective,
+      name: DBName.detective,
+      entities: [AnswerRecord],
+    }),
+    TypeOrmModule.forFeature([AnswerRecord], DBName.detective),
     ConfigModule,
-    getTypeormRootModule(DBName.detective, [AnswerRecord]),
-    TypeOrmModule.forFeature([AnswerRecord]),
+    UserModule,
   ],
   controllers: [DetectiveController],
   providers: [ConfigService, DetectiveService],

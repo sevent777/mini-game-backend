@@ -14,7 +14,6 @@ export class UserController {
   constructor(private readonly userService: UserService, private readonly jwtService: JwtService) {}
 
   @ApiResponse({
-    status: 200,
     type: LoginResponse,
   })
   @Post('/login')

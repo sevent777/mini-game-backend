@@ -10,6 +10,7 @@ import {
 
 @Entity({
   database: DBName.detective,
+  synchronize: true,
 })
 export class AnswerRecord {
   @ApiProperty()
@@ -18,11 +19,29 @@ export class AnswerRecord {
 
   @ApiProperty()
   @Column()
-  userID: string;
+  userID: number;
 
   @CreateDateColumn()
   createdAt: Date;
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @ApiProperty()
+  @Column({
+    type: 'json',
+  })
+  content: object;
+
+  @ApiProperty()
+  @Column({
+    type: 'int',
+  })
+  duration: number;
+
+  @ApiProperty()
+  @Column({
+    type: 'int',
+  })
+  score: number;
 }
