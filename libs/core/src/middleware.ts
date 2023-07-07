@@ -1,6 +1,6 @@
 import { ACCESS_TOKEN_KEY } from '@app/constant';
 import { UserService } from '@app/user';
-import { Injectable, NestMiddleware } from '@nestjs/common';
+import { Injectable, NestMiddleware, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { NextFunction, Response } from 'express';
 
@@ -29,8 +29,8 @@ export class LoginMiddleware implements NestMiddleware {
 
     if (wxUser) {
       req.userID = wxUser.id;
+      next();
     }
-
-    next();
+    throw new UnauthorizedException('Not logged in');
   }
 }

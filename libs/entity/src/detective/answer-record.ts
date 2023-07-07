@@ -21,6 +21,10 @@ export class AnswerRecord {
   @Column()
   userID: number;
 
+  @ApiProperty()
+  @Column()
+  testID: number;
+
   @CreateDateColumn()
   createdAt: Date;
 

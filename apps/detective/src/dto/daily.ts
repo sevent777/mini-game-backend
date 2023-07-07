@@ -4,6 +4,9 @@ import { ApiProperty } from '@nestjs/swagger';
 export class DetectiveTestInfo extends Configuration {
   @ApiProperty()
   finished: boolean;
+
+  @ApiProperty()
+  submitContent: object;
 }
 export class DailyTestInfo {
   @ApiProperty()

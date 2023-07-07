@@ -21,7 +21,8 @@ export class DetectiveController {
     const configs = await this.configService.getConfigs(ConfigPath.dailyDetective, {
       take: 1,
     });
-    const [testInfo] = configs;
+    const testList = await this.detectiveService.convertTestList(configs);
+    const [testInfo] = testList;
     return {
       testInfo,
     };

@@ -76,7 +76,10 @@ export class ConfigService {
     return config;
   }
 
-  async getConfigs(path: ConfigPath, options?: FindManyOptions<Configuration>): Promise<object[]> {
+  async getConfigs(
+    path: ConfigPath,
+    options?: FindManyOptions<Configuration>
+  ): Promise<Configuration[]> {
     const configs = await this.configurationRepo.find({
       where: [
         {
