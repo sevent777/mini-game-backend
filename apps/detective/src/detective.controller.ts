@@ -4,7 +4,7 @@ import { Body, Controller, Get, Param, ParseIntPipe, Post, ValidationPipe } from
 import { ApiResponse } from '@nestjs/swagger';
 
 import { DetectiveService } from './detective.service';
-import { DailyTestInfo, DetectiveTestList, SubmitAnswerInfo } from './dto';
+import { DailyTestInfo, DetectiveTestList, SubmitAnswerInfo, TestType } from './dto';
 
 @Controller(GameName.detective)
 export class DetectiveController {
@@ -31,11 +31,12 @@ export class DetectiveController {
   @ApiResponse({
     type: DetectiveTestList,
   })
-  @Get('/mini/test-list')
+  @Get(`/${TestType.mini}/test-list`)
   async getMiniDetectiveTestList() {
-    const list = await this.configService.getConfigs(ConfigPath.miniDetective);
+    const configs = await this.configService.getConfigs(ConfigPath.miniDetective);
+    const testList = await this.detectiveService.convertTestList(configs);
     return {
-      list,
+      list: testList,
     };
   }
 
