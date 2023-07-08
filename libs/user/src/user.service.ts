@@ -1,6 +1,5 @@
 import { User } from '@app/entity';
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
 import { pick } from 'lodash';
 import { FindOptionsWhere, Repository } from 'typeorm';
 
@@ -8,10 +7,7 @@ import { LoginPayload } from './user.dto';
 
 @Injectable()
 export class UserService {
-  constructor(
-    @InjectRepository(User)
-    private readonly userRepository: Repository<User>
-  ) {}
+  constructor(protected readonly userRepository: Repository<User>) {}
 
   async searchExistingUsers(payload: LoginPayload) {
     const conditions: FindOptionsWhere<User>[] = [];
@@ -36,7 +32,7 @@ export class UserService {
 
   async login(payload: LoginPayload): Promise<User> {
     const existingUser = await this.searchExistingUsers(payload);
-    const user = existingUser ?? new User();
+    const user = existingUser ?? this.userRepository.create();
 
     Object.assign(user, pick(payload, ['name', 'avatarUrl', 'wxOpenid']));
 

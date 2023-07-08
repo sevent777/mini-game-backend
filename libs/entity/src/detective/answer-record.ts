@@ -10,7 +10,6 @@ import {
 
 @Entity({
   database: DBName.detective,
-  synchronize: true,
 })
 export class AnswerRecord {
   @ApiProperty()

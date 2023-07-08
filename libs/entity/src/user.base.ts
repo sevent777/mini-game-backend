@@ -1,11 +1,7 @@
-import { MAIN_DATABASE_NAME } from '@app/constant';
 import { ApiProperty } from '@nestjs/swagger';
-import { Column, CreateDateColumn, Entity, Generated, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity, Column, CreateDateColumn, Generated, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity({
-  database: MAIN_DATABASE_NAME,
-})
-export class User {
+export abstract class User extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -24,7 +20,7 @@ export class User {
 
   @ApiProperty()
   @Column({
-    default: 'momo',
+    nullable: true,
   })
   name: string;
 

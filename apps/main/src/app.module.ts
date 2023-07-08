@@ -1,5 +1,5 @@
 import { JWT_SECRET, MAIN_DATABASE_NAME } from '@app/constant';
-import { BaseTypeOrmModuleOptions, Configuration, ConfigurationType, User } from '@app/entity';
+import { BaseTypeOrmModuleOptions, Configuration, ConfigurationType } from '@app/entity';
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -13,7 +13,7 @@ import { WebModule } from './web/web.module';
     TypeOrmModule.forRoot({
       ...BaseTypeOrmModuleOptions,
       database: MAIN_DATABASE_NAME,
-      entities: [User, ConfigurationType, Configuration],
+      entities: [ConfigurationType, Configuration],
     }),
     CmsModule,
     WebModule,

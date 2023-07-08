@@ -1,17 +1,18 @@
 import { ACCESS_TOKEN_KEY } from '@app/constant';
 import { genRspJson, UserID } from '@app/core';
-import { Body, Controller, Headers, Post, Req, Res, ValidationPipe } from '@nestjs/common';
+import { Body, Headers, Post, Req, Res, ValidationPipe } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiResponse } from '@nestjs/swagger';
 import { Request, Response } from 'express';
 
 import { LoginPayload, LoginResponse } from './user.dto';
 import { UserService } from './user.service';
 
-@ApiTags('user')
-@Controller('user')
-export class UserController {
-  constructor(private readonly userService: UserService, private readonly jwtService: JwtService) {}
+export abstract class UserController {
+  constructor(
+    protected readonly userService: UserService,
+    protected readonly jwtService: JwtService
+  ) {}
 
   @ApiResponse({
     type: LoginResponse,

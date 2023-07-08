@@ -4,7 +4,7 @@ import { MysqlConnectionOptions } from 'typeorm/driver/mysql/MysqlConnectionOpti
 export * from './configuration';
 export * from './configuration-type';
 export * from './detective';
-export * from './user';
+export * from './user.base';
 
 export const BaseTypeOrmModuleOptions: MysqlConnectionOptions = {
   type: 'mysql',
