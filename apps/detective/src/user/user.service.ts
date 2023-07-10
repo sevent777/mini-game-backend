@@ -1,6 +1,6 @@
 import { DBName } from '@app/constant';
 import { DetectiveUser } from '@app/entity';
-import { UserService } from '@app/user';
+import { UserInfoProvider, UserService } from '@app/user';
 import { Provider } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -8,10 +8,18 @@ import { Repository } from 'typeorm';
 export class DetectiveUserService extends UserService {
   constructor(
     @InjectRepository(DetectiveUser, DBName.detective)
-    protected readonly userRepository: Repository<DetectiveUser>
+    protected readonly userRepository: Repository<DetectiveUser>,
+    private userInfoProvider: UserInfoProvider
   ) {
-    console.log('init DetectiveUserService :>> ');
     super(userRepository);
+  }
+
+  getCurrentUser() {
+    return this.userRepository.findOne({
+      where: {
+        id: this.userInfoProvider.userID,
+      },
+    });
   }
 }
 

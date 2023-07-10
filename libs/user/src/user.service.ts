@@ -6,8 +6,10 @@ import { FindOptionsWhere, Repository } from 'typeorm';
 import { LoginPayload } from './user.dto';
 
 @Injectable()
-export class UserService {
+export abstract class UserService {
   constructor(protected readonly userRepository: Repository<User>) {}
+
+  abstract getCurrentUser(): Promise<User>;
 
   async searchExistingUsers(payload: LoginPayload) {
     const conditions: FindOptionsWhere<User>[] = [];

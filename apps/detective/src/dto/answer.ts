@@ -10,7 +10,9 @@ export class SubmitAnswerInfo {
   @IsNumber()
   duration: number;
 
-  @ApiProperty()
+  @ApiProperty({
+    additionalProperties: { type: 'object' },
+  })
   @IsObject()
-  content: Record<string, unknown>;
+  content: object;
 }
