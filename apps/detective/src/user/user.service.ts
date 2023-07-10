@@ -15,8 +15,6 @@ export class DetectiveUserService extends UserService {
   }
 }
 
-export const DetectiveUserProviderToken = 'DETECTIVE_USER_PROVIDER';
-
 export const DetectiveUserProvider: Provider = {
   provide: UserService,
   useClass: DetectiveUserService,

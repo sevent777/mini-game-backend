@@ -5,11 +5,11 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { DetectiveUserController } from './user.controller';
-import { DetectiveUserProvider, DetectiveUserService } from './user.service';
+import { DetectiveUserProvider } from './user.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([DetectiveUser], DBName.detective)],
-  providers: [DetectiveUserProvider, DetectiveUserService, UserInfoProvider],
+  providers: [DetectiveUserProvider, UserInfoProvider],
   controllers: [DetectiveUserController],
   exports: [DetectiveUserProvider, UserInfoProvider],
 })
