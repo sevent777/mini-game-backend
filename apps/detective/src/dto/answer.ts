@@ -12,5 +12,5 @@ export class SubmitAnswerInfo {
 
   @ApiProperty()
   @IsObject()
-  content: object;
+  content: Record<string, unknown>;
 }
