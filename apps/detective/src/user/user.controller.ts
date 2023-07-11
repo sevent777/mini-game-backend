@@ -1,16 +1,24 @@
 import { GameName } from '@app/constant';
-import { UserController, UserService } from '@app/user';
-import { Controller, Inject } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
+import { LoginPayload, LoginResponse, UserService } from '@app/user';
+import { Body, Controller, Inject, Post, Res, ValidationPipe } from '@nestjs/common';
+import { ApiResponse } from '@nestjs/swagger';
+import { Response } from 'express';
 
 import { DetectiveUserService } from './user.service';
 
 @Controller(`${GameName.detective}/user`)
-export class DetectiveUserController extends UserController {
-  constructor(
-    @Inject(UserService) protected readonly userService: DetectiveUserService,
-    protected readonly jwtService: JwtService
+export class DetectiveUserController {
+  constructor(@Inject(UserService) protected readonly userService: DetectiveUserService) {}
+
+  @ApiResponse({
+    type: LoginResponse,
+  })
+  @Post('/login')
+  async login(
+    @Body(new ValidationPipe())
+    loginPayload: LoginPayload,
+    @Res() res: Response
   ) {
-    super(userService, jwtService);
+    return this.userService.login(loginPayload, res);
   }
 }

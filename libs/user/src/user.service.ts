@@ -1,5 +1,9 @@
+import { ACCESS_TOKEN_KEY } from '@app/constant';
+import { genRspJson } from '@app/core';
 import { User } from '@app/entity';
 import { Injectable } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
+import { Response } from 'express';
 import { pick } from 'lodash';
 import { FindOptionsWhere, Repository } from 'typeorm';
 
@@ -10,7 +14,8 @@ import { UserInfoProvider } from './user-info.provider';
 export abstract class UserService {
   constructor(
     protected readonly userRepository: Repository<User>,
-    private userInfoProvider: UserInfoProvider
+    protected readonly userInfoProvider: UserInfoProvider,
+    protected readonly jwtService: JwtService
   ) {}
 
   abstract getCurrentUser(): Promise<User>;
@@ -37,12 +42,23 @@ export abstract class UserService {
     return existingUser;
   }
 
-  async login(payload: LoginPayload): Promise<User> {
+  async login(payload: LoginPayload, res: Response): Promise<void> {
     const existingUser = await this.searchExistingUsers();
-    const user = existingUser ?? this.userRepository.create();
+    const user = existingUser || this.userRepository.create();
 
     Object.assign(user, pick(payload, ['name', 'avatarUrl', 'wxOpenid']));
 
-    return this.userRepository.save(user);
+    const userInfo = await this.userRepository.save(user);
+    const jwtStr = await this.jwtService.signAsync({
+      id: userInfo.id,
+    });
+    res.cookie(ACCESS_TOKEN_KEY, jwtStr);
+    res
+      .json(
+        genRspJson({
+          userInfo,
+        })
+      )
+      .send();
   }
 }
