@@ -1,8 +1,7 @@
 import { ConfigModule, ConfigService } from '@app/config';
 import { DBName } from '@app/constant';
-import { LoginMiddleware } from '@app/core';
 import { AnswerRecord, BaseTypeOrmModuleOptions, DetectiveUser } from '@app/entity';
-import { MiddlewareConsumer, Module } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { DetectiveController } from './detective.controller';
@@ -25,8 +24,4 @@ import { DetectiveUserModule } from './user/user.module';
   providers: [ConfigService, DetectiveService],
   exports: [DetectiveUserModule, TypeOrmModule],
 })
-export class DetectiveModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer.apply(LoginMiddleware).forRoutes('*');
-  }
-}
+export class DetectiveModule {}
