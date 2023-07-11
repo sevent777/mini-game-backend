@@ -1,5 +1,5 @@
 import { ACCESS_TOKEN_KEY } from '@app/constant';
-import { genRspJson, UserID } from '@app/core';
+import { genRspJson } from '@app/core';
 import { Body, Headers, Post, Req, Res, ValidationPipe } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { ApiResponse } from '@nestjs/swagger';
@@ -23,13 +23,11 @@ export abstract class UserController {
     @Req() request: Request,
     @Body(new ValidationPipe())
     loginPayload: LoginPayload,
-    @Res() res: Response,
-    @UserID() userId: number
+    @Res() res: Response
   ) {
     const finalLoginPayload: LoginPayload = {
       ...loginPayload,
       wxOpenid: headers['x-wx-openid'],
-      id: userId,
     };
     const userInfo = await this.userService.login(finalLoginPayload);
     const jwtStr = await this.jwtService.signAsync({

@@ -11,7 +11,7 @@ export class SubmitAnswerInfo {
   duration: number;
 
   @ApiProperty({
-    additionalProperties: { type: 'object' },
+    type: 'object',
   })
   @IsObject()
   content: object;

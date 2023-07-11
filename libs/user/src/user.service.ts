@@ -4,18 +4,22 @@ import { pick } from 'lodash';
 import { FindOptionsWhere, Repository } from 'typeorm';
 
 import { LoginPayload } from './user.dto';
+import { UserInfoProvider } from './user-info.provider';
 
 @Injectable()
 export abstract class UserService {
-  constructor(protected readonly userRepository: Repository<User>) {}
+  constructor(
+    protected readonly userRepository: Repository<User>,
+    private userInfoProvider: UserInfoProvider
+  ) {}
 
   abstract getCurrentUser(): Promise<User>;
 
   async searchExistingUsers(payload: LoginPayload) {
     const conditions: FindOptionsWhere<User>[] = [];
-    if (payload.id) {
+    if (this.userInfoProvider.userID) {
       conditions.push({
-        id: payload.id,
+        id: this.userInfoProvider.userID,
       });
     }
     if (payload.wxOpenid) {
