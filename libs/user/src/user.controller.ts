@@ -27,7 +27,6 @@ export abstract class UserController {
   ) {
     const finalLoginPayload: LoginPayload = {
       ...loginPayload,
-      wxOpenid: headers['x-wx-openid'],
     };
     const userInfo = await this.userService.login(finalLoginPayload);
     const jwtStr = await this.jwtService.signAsync({

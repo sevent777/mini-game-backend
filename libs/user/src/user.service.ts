@@ -15,16 +15,17 @@ export abstract class UserService {
 
   abstract getCurrentUser(): Promise<User>;
 
-  async searchExistingUsers(payload: LoginPayload) {
+  async searchExistingUsers() {
     const conditions: FindOptionsWhere<User>[] = [];
     if (this.userInfoProvider.userID) {
       conditions.push({
         id: this.userInfoProvider.userID,
       });
     }
-    if (payload.wxOpenid) {
+
+    if (this.userInfoProvider.wxOpenid) {
       conditions.push({
-        wxOpenid: payload.wxOpenid,
+        wxOpenid: this.userInfoProvider.wxOpenid,
       });
     }
     if (conditions.length === 0) {
@@ -37,7 +38,7 @@ export abstract class UserService {
   }
 
   async login(payload: LoginPayload): Promise<User> {
-    const existingUser = await this.searchExistingUsers(payload);
+    const existingUser = await this.searchExistingUsers();
     const user = existingUser ?? this.userRepository.create();
 
     Object.assign(user, pick(payload, ['name', 'avatarUrl', 'wxOpenid']));

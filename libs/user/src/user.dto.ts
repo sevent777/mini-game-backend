@@ -9,11 +9,6 @@ export class LoginPayload {
   name?: string;
 
   @ApiProperty()
-  @IsOptional()
-  @IsString()
-  wxOpenid?: string;
-
-  @ApiProperty()
   @IsString()
   @IsOptional()
   avatarUrl?: string;

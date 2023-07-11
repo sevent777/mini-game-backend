@@ -9,4 +9,8 @@ export class UserInfoProvider {
   get userID() {
     return this.request.userID;
   }
+
+  get wxOpenid() {
+    return this.request.headers['x-wx-openid'] as string;
+  }
 }
