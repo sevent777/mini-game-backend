@@ -1,6 +1,6 @@
 import { DBName } from '@app/constant';
 import { AnswerRecord, Configuration } from '@app/entity';
-import { UserInfoProvider, UserService } from '@app/user';
+import { UserService } from '@app/user';
 import { Inject, Injectable } from '@nestjs/common';
 import { InjectEntityManager, InjectRepository } from '@nestjs/typeorm';
 import { EntityManager, In, Repository } from 'typeorm';
@@ -13,14 +13,13 @@ export class DetectiveService {
   constructor(
     @InjectRepository(AnswerRecord, DBName.detective)
     private readonly answerRecordRepo: Repository<AnswerRecord>,
-    private userInfoProvider: UserInfoProvider,
     @InjectEntityManager(DBName.detective) private readonly entityManager: EntityManager,
     @Inject(UserService) protected readonly userService: DetectiveUserService
   ) {}
 
   async findAnswerRecord(testID: number): Promise<AnswerRecord> {
     return this.answerRecordRepo.findOne({
-      where: { userID: this.userInfoProvider.userID, testID },
+      where: { userID: this.userService.userID, testID },
     });
   }
 
@@ -29,7 +28,7 @@ export class DetectiveService {
     if (existingRecord) {
       return existingRecord;
     }
-    return this.answerRecordRepo.create({ userID: this.userInfoProvider.userID, testID });
+    return this.answerRecordRepo.create({ userID: this.userService.userID, testID });
   }
 
   async submitAnswer(testID: number, info: SubmitAnswerInfo) {
@@ -46,7 +45,7 @@ export class DetectiveService {
   async convertTestList(configs: Configuration[]) {
     const testIDList = configs.map(({ id }) => id);
     const records = await this.answerRecordRepo.find({
-      where: { userID: this.userInfoProvider.userID, testID: In(testIDList) },
+      where: { userID: this.userService.userID, testID: In(testIDList) },
     });
     return configs.map((item) => {
       const record = records.find((record) => record.testID === item.id);

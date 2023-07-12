@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { BaseEntity, Column, CreateDateColumn, Generated, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, CreateDateColumn, Generated, PrimaryGeneratedColumn } from 'typeorm';
 
-export abstract class User extends BaseEntity {
+export abstract class User {
   @PrimaryGeneratedColumn()
   id: number;
 

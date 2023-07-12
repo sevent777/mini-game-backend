@@ -1,36 +1,43 @@
 import { ACCESS_TOKEN_KEY } from '@app/constant';
-import { genRspJson } from '@app/core';
+import { ExtendedRequest, genRspJson } from '@app/core';
 import { User } from '@app/entity';
-import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { Response } from 'express';
 import { pick } from 'lodash';
 import { FindOptionsWhere, Repository } from 'typeorm';
 
 import { LoginPayload } from './user.dto';
-import { UserInfoProvider } from './user-info.provider';
 
-@Injectable()
 export abstract class UserService {
   constructor(
+    protected readonly request: ExtendedRequest,
     protected readonly userRepository: Repository<User>,
-    protected readonly userInfoProvider: UserInfoProvider,
     protected readonly jwtService: JwtService
-  ) {}
+  ) {
+    console.log('init UserServic1 :>> ');
+  }
+
+  get userID() {
+    return this.request.userID;
+  }
+
+  get wxOpenid() {
+    return this.request.headers['x-wx-openid'] as string;
+  }
 
   abstract getCurrentUser(): Promise<User>;
 
-  async searchExistingUsers() {
+  async searchExistingUsers(payload: LoginPayload) {
+    const { userID = this.userID, wxOpenid = this.wxOpenid } = payload;
     const conditions: FindOptionsWhere<User>[] = [];
-    if (this.userInfoProvider.userID) {
+    if (userID) {
       conditions.push({
-        id: this.userInfoProvider.userID,
+        id: userID,
       });
     }
-
-    if (this.userInfoProvider.wxOpenid) {
+    if (wxOpenid) {
       conditions.push({
-        wxOpenid: this.userInfoProvider.wxOpenid,
+        wxOpenid,
       });
     }
     if (conditions.length === 0) {
@@ -43,7 +50,7 @@ export abstract class UserService {
   }
 
   async login(payload: LoginPayload, res: Response): Promise<void> {
-    const existingUser = await this.searchExistingUsers();
+    const existingUser = await this.searchExistingUsers(payload);
     const user = existingUser || this.userRepository.create();
 
     Object.assign(user, pick(payload, ['name', 'avatarUrl', 'wxOpenid']));

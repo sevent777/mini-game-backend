@@ -23,13 +23,19 @@ export class LoginMiddleware implements NestMiddleware {
       console.error(e);
     }
 
-    const wxUser = await this.userService.searchExistingUsers();
+    const wxOpenid = req.headers['x-wx-openid'] as string;
+    if (!wxOpenid) {
+      // prevent ddos
+      throw new UnauthorizedException('Not logged in');
+    }
+
+    const wxUser = await this.userService.searchExistingUsers({
+      wxOpenid,
+    });
 
     if (wxUser) {
       req.userID = wxUser.id;
-      next();
-      return;
     }
-    throw new UnauthorizedException('Not logged in');
+    next();
   }
 }
