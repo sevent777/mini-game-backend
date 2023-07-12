@@ -6,7 +6,6 @@ import { User } from '../user.base';
 
 @Entity({
   database: DBName.detective,
-  synchronize: true,
 })
 export class DetectiveUser extends User {
   @ApiProperty()

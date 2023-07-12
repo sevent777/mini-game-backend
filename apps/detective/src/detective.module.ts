@@ -15,6 +15,7 @@ import { DetectiveUserModule } from './user/user.module';
       database: DBName.detective,
       name: DBName.detective,
       entities: [AnswerRecord, DetectiveUser],
+      synchronize: true,
     }),
     TypeOrmModule.forFeature([AnswerRecord], DBName.detective),
     DetectiveUserModule,
